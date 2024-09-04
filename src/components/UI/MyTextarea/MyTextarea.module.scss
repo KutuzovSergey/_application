@@ -1,0 +1,45 @@
+@import '../../../styles/Main.scss';
+
+.myTextarea{
+     @include textarea(100%, 40px, $color_second, 0.9em, 5px 15px, $second_corporate_color, 3px, $background);
+     
+
+    &::placeholder{
+        font-size: 0.9em;
+        color: #9b9b9e;
+        text-transform: uppercase;
+        // font-family: $font_style;
+    }
+
+    &::-webkit-input-placeholder {
+        font-size: 0.9em;
+        color: #9b9b9e;
+        text-transform: uppercase;
+        // font-family: $font_style;
+    }
+
+    &::-moz-placeholder {
+        font-size: 0.9em;
+        color: #9b9b9e;
+        text-transform: uppercase;
+        // font-family: $font_style;
+    }/* Firefox 19+ */
+    
+    &:-moz-placeholder {
+        font-size: 0.9em;
+        color: #9b9b9e;
+        text-transform: uppercase;
+        // font-family: $font_style;
+    }/* Firefox 18- */
+
+    &:-ms-input-placeholder {
+        font-size: 0.9em;
+        color: #9b9b9e;
+        text-transform: uppercase;
+        // font-family: $font_style;
+    }
+
+}
+
+
+

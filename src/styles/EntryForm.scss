@@ -1,0 +1,10 @@
+@import './Main.scss';
+
+.entryForm{
+    width: 1200px;
+    padding: 20px 30px;
+    margin: auto;
+    background-color: $background_block;
+    display: flex;
+    justify-content: space-around;
+}

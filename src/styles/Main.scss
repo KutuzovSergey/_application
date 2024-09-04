@@ -1,0 +1,44 @@
+// @import '../fonts/Montserrat/static/Montserrat-Medium.ttf';
+// @import '../fonts/Montserrat/static/Montserrat-Bold.ttf';
+
+$background: #FFFFAB;
+$background_block: #3DA597;
+$color: hsl(0, 0%, 100%);
+$color_second: #242222;
+$corporate_color: #003F5F;
+$second_corporate_color: #003F5F;
+// $font_style: "Montserrat", system-ui;
+
+@mixin block {
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    background-color: $background_block;
+}
+
+@mixin text {
+    color: $color;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    // font-family: "Montserrat", system-ui;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+}
+
+@mixin textarea($width, $height, $color, $fontSize, $padding, $border, $borderRadius, $background-color){
+    resize: none;
+    width: $width;
+    height: $height;
+    color: $color;
+    font-size: $fontSize;
+    padding: $padding;
+    border: 1px solid $border;
+    border-radius: $borderRadius;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    background-color: $background-color;
+    // font-family: 'Rubik Mono One', sans-serif;
+}
