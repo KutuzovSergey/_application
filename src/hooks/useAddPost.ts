@@ -1,5 +1,5 @@
 import { useState, ChengeEvent } from 'react';
-import { useAddPostType } from '../type/typesMain';
+import { useAddPostType } from '../type/typesHooks.ts';
 
 export const useAddPost = (): useAddPostType => {
   const [newEntry, setNewEntry] = useState<string>('');

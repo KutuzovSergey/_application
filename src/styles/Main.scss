@@ -1,36 +1,43 @@
 // @import '../fonts/Montserrat/static/Montserrat-Medium.ttf';
 // @import '../fonts/Montserrat/static/Montserrat-Bold.ttf';
 
-$background: #FFFFAB;
-$background_block: #3DA597;
+$background: #acacac;
+$background_: #161616;
+$background_block: #35363937;
+$background_color: rgba(0, 0, 0, 0.554);
+$background_color_fourth: rgba(5, 7, 10, 0.4);
 $color: hsl(0, 0%, 100%);
+$color_third:  rgb(148, 160, 184);
 $color_second: #242222;
 $corporate_color: #003F5F;
 $second_corporate_color: #003F5F;
-// $font_style: "Montserrat", system-ui;
+// $font_style: "Montserrat", system-ui; rgba(5, 7, 10, 0.4)
 
-@mixin block {
-    width: 90%;
-    height: 100%;
-    margin: auto;
-    padding-top: 40px;
-    padding-bottom: 30px;
-    background-color: $background_block;
+@mixin blockContent($width, $height, $margin, $display, $alignItems, $justifyContent) {
+    width: $width;
+    height: $height;
+    margin: $margin;
+    display: $display;
+    align-items: $alignItems;
+    justify-content: $justifyContent;
 }
 
-@mixin text {
+@mixin text ($color, $fontSize, $fontWeight, $lineHeight, $textAlign){
     color: $color;
-    font-size: 1.7rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    // font-family: "Montserrat", system-ui;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    line-height: $lineHeight;
+    text-align: $textAlign;
+}
+@mixin modalFon {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-@mixin textarea($width, $height, $color, $fontSize, $padding, $border, $borderRadius, $background-color){
-    resize: none;
+@mixin data_entry_form($width, $height, $color, $fontSize, $padding, $border, $borderRadius){
     width: $width;
     height: $height;
     color: $color;
@@ -39,6 +46,5 @@ $second_corporate_color: #003F5F;
     border: 1px solid $border;
     border-radius: $borderRadius;
     box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-    background-color: $background-color;
-    // font-family: 'Rubik Mono One', sans-serif;
+    font-family: 'Rubik Mono One', sans-serif;
 }

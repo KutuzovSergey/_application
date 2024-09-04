@@ -14,9 +14,3 @@ export type ChangeListActionType = {
    type: string,
    textPost: string
 }
-
-export type useAddPostType = {
-   newEntry: string,
-   chengePost: (e: ChengeEvent<HTMLInputElement>) => void,
-   addPost: () => void,
-}
