@@ -3,8 +3,8 @@ import { ErrorStatusType, UseLoginAccountType, UserDataType, ErrorTextType } fro
 
 export const useLoginAccount = (): UseLoginAccountType =>{
     const [userData, setUserData] = useState<UserDataType>({
-        userName: '',
-        userPassword: '',
+        username: '',
+        password: '',
     });
 
     const [errorStatus, setErrorStatus] = useState<ErrorStatusType>({
@@ -24,13 +24,13 @@ export const useLoginAccount = (): UseLoginAccountType =>{
         
         switch (formElem.name) {
             case 'UserName':
-                newUserData.userName = formElem.value;
+                newUserData.username = formElem.value;
                 // if (newErrorStatus.errorName) {
                 //     newErrorStatus.errorName = false;
                 // }
                 break;
             case 'UserPassword':
-                newUserData.userPassword = formElem.value;
+                newUserData.password = formElem.value;
                 // if (newErrorStatus.errorPassword) {
                 //     newErrorStatus.errorPassword = false;
                 // }
@@ -61,7 +61,7 @@ export const useLoginAccount = (): UseLoginAccountType =>{
                         if (newErrorStatus.errorName) {
                             newErrorStatus.errorName = false;
                         }
-                    } else if (elementValue.length < 2) {
+                    } else if (elementValue.length < 3) {
                         newErrorText.errorName = 'Логин не может содержать меньше двух символов';
                         result = ++result;
                         if (newErrorStatus.errorName) {
@@ -81,7 +81,7 @@ export const useLoginAccount = (): UseLoginAccountType =>{
                         if (newErrorStatus.errorPassword) {
                             newErrorStatus.errorPassword = false;
                         }
-                    } else if (elementValue.length < 2) {
+                    } else if (elementValue.length < 3) {
                         newErrorText.errorPassword = 'Пароль не может содержать меньше двух символов';
                         result = ++result;
                         if (newErrorStatus.errorPassword) {

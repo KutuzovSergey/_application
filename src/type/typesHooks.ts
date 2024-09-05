@@ -7,8 +7,8 @@ export type UseAddPostType = {
 }
 
 export type UserDataType = {
-   userName: string,
-   userPassword: string,
+   username: string,
+   password: string,
 }
 
 export type ErrorStatusType = {

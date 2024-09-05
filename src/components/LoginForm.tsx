@@ -13,8 +13,7 @@ const LoginForm: FC = () => {
 
     const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
         e.preventDefault();
-        console.log(errorText);
-        console.log(errorStatus);
+        
         if (validation(e)) {
             console.log('отправляем');
         }
