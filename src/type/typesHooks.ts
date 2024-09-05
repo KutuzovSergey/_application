@@ -1,8 +1,8 @@
-import { ChengeEvent } from 'react';
+import { FormEvent, ChangeEvent } from 'react';
 
 export type UseAddPostType = {
    newEntry: string,
-   chengePost: (e: ChengeEvent<HTMLInputElement>) => void,
+   chengePost: (e: ChangeEvent<HTMLInputElement>) => void,
    addPost: () => void,
 }
 
@@ -16,8 +16,15 @@ export type ErrorStatusType = {
    errorPassword: boolean,
 }
 
-export type UseLoginAccountType = {
-   userData: UserDataType,
-   changeInput: (e: ChengeEvent<HTMLInputElement>) => void,
-   addPost: () => void,
+export type ErrorTextType = {
+   errorName: string,
+   errorPassword: string,
 }
+
+export type UseLoginAccountType = [
+   userData: UserDataType,
+   errorText: ErrorTextType,
+   errorStatus: ErrorStatusType,
+   changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
+   validation: (e: FormEvent<HTMLInputElement>) => boolean
+]
