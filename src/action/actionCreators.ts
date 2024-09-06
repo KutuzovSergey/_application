@@ -1,4 +1,4 @@
-import { changeIsAuthConst, userConst } from "../constants/constants.ts";
+import { changeIsAuthConst, userConst, InstallTokenConst } from "../constants/constants.ts";
 import { UserDataType } from "../type/typesHooks.ts";
 import { UserActionType } from "../type/typesStore.ts";
 
@@ -20,6 +20,13 @@ export const addUser = (userData: UserDataType): UserActionType => {
 export const deleteUser = (userData: UserDataType): UserActionType => {
     return {
         type: userConst.DELETE_USER,
+        userData: userData
+    }
+}
+
+export const installToken = (userData: string): UserActionType => {
+    return {
+        type: InstallTokenConst.INSTALL_TOKEN,
         userData: userData
     }
 }

@@ -2,14 +2,15 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import {
     ErrorStatusRegistrType,
     UseRegistrAccountType,
-    UserDataType,
+    UserDataRegistrType,
     ErrorTextRegistrType
 } from "../type/typesHooks";
 
 export const useRegistrAccount = (): UseRegistrAccountType =>{
-    const [userData, setUserData] = useState<UserDataType>({
+    const [userData, setUserData] = useState<UserDataRegistrType>({
         username: '',
         password: '',
+        repeatPassword: '',
     });
 
     const [errorStatus, setErrorStatus] = useState<ErrorStatusRegistrType>({
@@ -25,7 +26,7 @@ export const useRegistrAccount = (): UseRegistrAccountType =>{
     });
 
     const changeInput = (e: ChangeEvent): void => {
-        const newUserData: UserDataType = { ...userData };
+        const newUserData: UserDataRegistrType = { ...userData };
         const formElem = e.target as HTMLInputElement;
         
         switch (formElem.name) {
@@ -34,6 +35,9 @@ export const useRegistrAccount = (): UseRegistrAccountType =>{
                 break;
             case 'UserPassword':
                 newUserData.password = formElem.value;
+                break;
+            case 'RepeatPassword':
+                newUserData.repeatPassword = formElem.value;
                 break;
             default:
                 break;
@@ -80,11 +84,20 @@ export const useRegistrAccount = (): UseRegistrAccountType =>{
                         if (newErrorStatus.errorPassword) {
                             newErrorStatus.errorPassword = false;
                         }
-                    } else if (elementValue.length < 3) {
-                        newErrorText.errorPassword = 'Пароль не может содержать меньше двух символов';
+                    } else if (elementValue.length < 6) {
+                        newErrorText.errorPassword = 'Пароль не может содержать меньше пяти символов';
                         result = ++result;
                         if (newErrorStatus.errorPassword) {
                             newErrorStatus.errorPassword = false;
+                        }
+                    } else if (elementValue !== userData.repeatPassword) {
+                        newErrorText.errorPassword = 'Пароли не совпадают';
+                        newErrorText.errorRepeatPassword = 'Пароли не совпадают';
+                        console.log(newErrorText);
+                        result = ++result;
+                        if (newErrorStatus.errorPassword || newErrorStatus.errorRepeatPassword) {
+                            newErrorStatus.errorPassword = false;
+                            newErrorStatus.errorRepeatPassword = false;
                         }
                     } else {
                         newErrorText.errorPassword = '';
@@ -92,23 +105,25 @@ export const useRegistrAccount = (): UseRegistrAccountType =>{
                             newErrorStatus.errorPassword = true;
                         }
                     }
-                case 'UserPassword':
+                case 'RepeatPassword':
                     if (!elementValue) {
-                        newErrorText.errorPassword = 'Поле не может быть пустым';
+                        newErrorText.errorRepeatPassword = 'Поле не может быть пустым';
                         result = ++result;
-                        if (newErrorStatus.errorPassword) {
-                            newErrorStatus.errorPassword = false;
+                        if (newErrorStatus.errorRepeatPassword) {
+                            newErrorStatus.errorRepeatPassword = false;
                         }
-                    } else if (elementValue !== form[1].value.trim()) {
+                    } else if (elementValue !== userData.password) {
                         newErrorText.errorPassword = 'Пароли не совпадают';
+                        newErrorText.errorRepeatPassword = 'Пароли не совпадают';
                         result = ++result;
-                        if (newErrorStatus.errorPassword) {
+                        if (newErrorStatus.errorRepeatPassword || newErrorStatus.errorPassword) {
                             newErrorStatus.errorPassword = false;
+                            newErrorStatus.errorRepeatPassword = false;
                         }
                     } else {
-                        newErrorText.errorPassword = '';
-                        if (!newErrorStatus.errorPassword) {
-                            newErrorStatus.errorPassword = true;
+                        newErrorText.errorRepeatPassword = '';
+                        if (!newErrorStatus.errorRepeatPassword) {
+                            newErrorStatus.errorRepeatPassword = true;
                         }
                     }
                 default:
@@ -130,6 +145,17 @@ export const useRegistrAccount = (): UseRegistrAccountType =>{
         setUserData({
             username: '',
             password: '',
+            repeatPassword: ''
+        });
+        setErrorStatus({
+            errorName: false,
+            errorPassword: false,
+            errorRepeatPassword: false,
+        });
+        setErrorText({
+            errorName: '',
+            errorPassword: '',
+            errorRepeatPassword: '',
         });
     }
 

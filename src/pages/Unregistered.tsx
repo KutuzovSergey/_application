@@ -37,7 +37,7 @@ const Unregistered: FC = () => {
             <MyModal
                 active={modalRegistr}
                 setActive={setModalRegistr}>
-                <RegistrForm active={setModalRegistr} />
+                <RegistrForm active={modalRegistr} setActive={setModalRegistr} />
             </MyModal>
         </div>
     )

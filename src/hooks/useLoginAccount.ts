@@ -1,5 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { ErrorStatusType, UseLoginAccountType, UserDataType, ErrorTextType } from "../type/typesHooks";
+import {
+    ErrorStatusType,
+    UseLoginAccountType,
+    UserDataType,
+    ErrorTextType
+} from "../type/typesHooks";
 
 export const useLoginAccount = (): UseLoginAccountType =>{
     const [userData, setUserData] = useState<UserDataType>({
@@ -53,8 +58,8 @@ export const useLoginAccount = (): UseLoginAccountType =>{
                         if (newErrorStatus.errorName) {
                             newErrorStatus.errorName = false;
                         }
-                    } else if (elementValue.length < 3) {
-                        newErrorText.errorName = 'Логин не может содержать меньше двух символов';
+                    } else if (elementValue.length < 6) {
+                        newErrorText.errorName = 'Логин не может содержать меньше пяти символов';
                         result = ++result;
                         if (newErrorStatus.errorName) {
                             newErrorStatus.errorName = false;
@@ -104,6 +109,14 @@ export const useLoginAccount = (): UseLoginAccountType =>{
         setUserData({
             username: '',
             password: '',
+        });
+        setErrorStatus({
+            errorName: false,
+            errorPassword: false,
+        });
+        setErrorText({
+            errorName: '',
+            errorPassword: '',
         });
     }
 

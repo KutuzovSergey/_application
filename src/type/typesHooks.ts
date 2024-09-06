@@ -33,6 +33,12 @@ export type UseLoginAccountType = [
 ]
 
 // Регистрация
+export type UserDataRegistrType = {
+   username: string,
+   password: string,
+   repeatPassword: string
+}
+
 export type ErrorStatusRegistrType = {
    errorName: boolean,
    errorPassword: boolean,
@@ -46,9 +52,9 @@ export type ErrorTextRegistrType = {
 }
 
 export type UseRegistrAccountType = [
-   userData: UserDataType,
-   errorText: ErrorTextType,
-   errorStatus: ErrorStatusType,
+   userData: UserDataRegistrType,
+   errorText: ErrorTextRegistrType,
+   errorStatus: ErrorStatusRegistrType,
    changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
    validation: (e: FormEvent<HTMLInputElement>) => boolean,
    clearForm: () => void,

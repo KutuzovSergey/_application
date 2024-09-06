@@ -2,7 +2,7 @@ import { UserDataType } from "./typesHooks";
 
 export type UserActionType = {
    type: string,
-   userData: UserDataType | boolean
+   userData: UserDataType | boolean | string
 }
 
 export type UserConstType = {
@@ -12,9 +12,14 @@ export type UserConstType = {
 
 export type StateUserType = {
    userData: UserDataType,
-   isAuth: boolean
+   isAuth: boolean,
+   token: string
 }
 
 export type changeIsAuthConstType = {
    CHANGE_IS_AUTH: string,
+}
+
+export type InstallTokenConstType = {
+   INSTALL_TOKEN: string,
 }

@@ -1,4 +1,4 @@
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, useEffect } from 'react';
 import MyInput from '../components/UI/MyInput/MyInput.tsx';
 import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
@@ -10,7 +10,8 @@ import { addUser, changeIsAuth } from '../action/actionCreators.ts';
 import '../styles/componentStyles/loginForm.scss';
 
 type Props = {
-    active: (active: boolean) => void
+    active: boolean,
+    setActive: (active: boolean) => void
 }
 
 const LoginForm: FC = (props: Props) => {
@@ -25,10 +26,16 @@ const LoginForm: FC = (props: Props) => {
             dispatch(addUser(userData));
             dispatch(changeIsAuth(true));
             localStorage.isAuth = true;
-            props.active(false);
+            props.setActive(false);
             clearForm();
         }
     }
+
+    useEffect(() => {
+        if (!props.active) {
+            clearForm();
+        }
+    }, [props.active]);
 
     return (
         <div className="login-form">
@@ -50,7 +57,7 @@ const LoginForm: FC = (props: Props) => {
                 </div>
                 <div className="login-form__block">
                     <div className="login-form__label-block">
-                        <label htmlFor="UserName " className="login-form__label">Password</label>
+                        <label htmlFor="UserPassword " className="login-form__label">Password</label>
                     </div>
                     <MyInput
                         type='password'
