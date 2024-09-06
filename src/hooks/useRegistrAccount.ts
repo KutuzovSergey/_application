@@ -1,20 +1,27 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { ErrorStatusType, UseLoginAccountType, UserDataType, ErrorTextType } from "../type/typesHooks";
+import {
+    ErrorStatusRegistrType,
+    UseRegistrAccountType,
+    UserDataType,
+    ErrorTextRegistrType
+} from "../type/typesHooks";
 
-export const useLoginAccount = (): UseLoginAccountType =>{
+export const useRegistrAccount = (): UseRegistrAccountType =>{
     const [userData, setUserData] = useState<UserDataType>({
         username: '',
         password: '',
     });
 
-    const [errorStatus, setErrorStatus] = useState<ErrorStatusType>({
+    const [errorStatus, setErrorStatus] = useState<ErrorStatusRegistrType>({
         errorName: false,
         errorPassword: false,
+        errorRepeatPassword: false,
     });
 
-    const [errorText, setErrorText] = useState<ErrorTextType>({
+    const [errorText, setErrorText] = useState<ErrorTextRegistrType>({
         errorName: '',
         errorPassword: '',
+        errorRepeatPassword: '',
     });
 
     const changeInput = (e: ChangeEvent): void => {
@@ -37,8 +44,8 @@ export const useLoginAccount = (): UseLoginAccountType =>{
 
     const validation = (e: FormEvent<HTMLInputElement>): boolean => {
         const form = e.target as HTMLFormElement;
-        const newErrorText: ErrorTextType = { ...errorText };
-        const newErrorStatus: ErrorStatusType = { ...errorStatus };
+        const newErrorText: ErrorTextRegistrType = { ...errorText };
+        const newErrorStatus: ErrorStatusRegistrType = { ...errorStatus };
         let result = 0;
 
         for (let i = 0; i < form.length; i++) {
@@ -75,6 +82,25 @@ export const useLoginAccount = (): UseLoginAccountType =>{
                         }
                     } else if (elementValue.length < 3) {
                         newErrorText.errorPassword = 'Пароль не может содержать меньше двух символов';
+                        result = ++result;
+                        if (newErrorStatus.errorPassword) {
+                            newErrorStatus.errorPassword = false;
+                        }
+                    } else {
+                        newErrorText.errorPassword = '';
+                        if (!newErrorStatus.errorPassword) {
+                            newErrorStatus.errorPassword = true;
+                        }
+                    }
+                case 'UserPassword':
+                    if (!elementValue) {
+                        newErrorText.errorPassword = 'Поле не может быть пустым';
+                        result = ++result;
+                        if (newErrorStatus.errorPassword) {
+                            newErrorStatus.errorPassword = false;
+                        }
+                    } else if (elementValue !== form[1].value.trim()) {
+                        newErrorText.errorPassword = 'Пароли не совпадают';
                         result = ++result;
                         if (newErrorStatus.errorPassword) {
                             newErrorStatus.errorPassword = false;

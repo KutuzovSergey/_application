@@ -2,8 +2,8 @@
 // @import '../fonts/Montserrat/static/Montserrat-Bold.ttf';
 
 $background: #acacac;
-$background_: #161616;
-$background_block: #35363937;
+$background_: rgba(5, 7, 10, 0.4);
+$background_block: #97999e18;
 $background_color: rgba(0, 0, 0, 0.554);
 $background_color_fourth: rgba(5, 7, 10, 0.4);
 $color: hsl(0, 0%, 100%);
@@ -28,6 +28,7 @@ $second_corporate_color: #003F5F;
     font-weight: $fontWeight;
     line-height: $lineHeight;
     text-align: $textAlign;
+    font-family: "Roboto", sans-serif;
 }
 @mixin modalFon {
     width: 100%;

@@ -9,5 +9,6 @@
         @include blockContent(900px, 200px, auto, flex, center, space-around);
         margin: 100px auto 0 auto;
         background-color: $background_;
+        border-radius: 30px;
     }
 }

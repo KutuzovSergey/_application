@@ -6,6 +6,8 @@ export type UseAddPostType = {
    addPost: () => void,
 }
 
+
+// Вход на сайт
 export type UserDataType = {
    username: string,
    password: string,
@@ -26,5 +28,28 @@ export type UseLoginAccountType = [
    errorText: ErrorTextType,
    errorStatus: ErrorStatusType,
    changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
-   validation: (e: FormEvent<HTMLInputElement>) => boolean
+   validation: (e: FormEvent<HTMLInputElement>) => boolean,
+   clearForm: () => void,
+]
+
+// Регистрация
+export type ErrorStatusRegistrType = {
+   errorName: boolean,
+   errorPassword: boolean,
+   errorRepeatPassword: boolean
+}
+
+export type ErrorTextRegistrType = {
+   errorName: string,
+   errorPassword: string,
+   errorRepeatPassword: string
+}
+
+export type UseRegistrAccountType = [
+   userData: UserDataType,
+   errorText: ErrorTextType,
+   errorStatus: ErrorStatusType,
+   changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
+   validation: (e: FormEvent<HTMLInputElement>) => boolean,
+   clearForm: () => void,
 ]

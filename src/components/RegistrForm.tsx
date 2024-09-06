@@ -2,8 +2,7 @@ import { FC, FormEvent } from 'react';
 import MyInput from '../components/UI/MyInput/MyInput.tsx';
 import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
-import { useLoginAccount } from '../hooks/useLoginAccount.ts';
-// import { UseLoginAccountType } from '../type/typesHooks.ts';
+import { useRegistrAccount } from '../hooks/useRegistrAccount.ts';
 import { useDispatch } from 'react-redux';
 import { addUser, changeIsAuth } from '../action/actionCreators.ts';
 
@@ -13,8 +12,8 @@ type Props = {
     active: (active: boolean) => void
 }
 
-const LoginForm: FC = (props: Props) => {
-    const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useLoginAccount();
+const RegistrForm: FC = (props: Props) => {
+    const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useRegistrAccount();
 
     const dispatch = useDispatch();
 
@@ -33,7 +32,7 @@ const LoginForm: FC = (props: Props) => {
     return (
         <div className="login-form">
             <div className="login-form__block">
-                <span className="login-form__title">Войти</span>
+                <span className="login-form__title">Регистрация</span>
             </div>
             <form className="login-form__wtapper" onSubmit={submittingForm}>
                 <div className="login-form__block">
@@ -60,6 +59,18 @@ const LoginForm: FC = (props: Props) => {
                         onChange={changeInput} />
                     <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorPassword}>{errorText.errorPassword}</ErrorForm>
                 </div>
+                <div className='login-form__block'>
+                    <div className="login-form__label-block">
+                        <label htmlFor='RepeatPassword' className='login-form__label'>Repeat Password</label>
+                    </div>
+                    <MyInput
+                        type='password'
+                        name='RepeatPassword'
+                        value={userData.repeatPassword}
+                        placeholder='Повторите пароль'
+                        onChange={changeInput} />
+                    <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorRepeatPassword}>{errorText.errorRepeatPassword}</ErrorForm>
+                </div>
                 <div className="login-form__button">
                     <MyButton>вход</MyButton>
                 </div>
@@ -68,4 +79,4 @@ const LoginForm: FC = (props: Props) => {
     )
 }
 
-export default LoginForm;
+export default RegistrForm;
