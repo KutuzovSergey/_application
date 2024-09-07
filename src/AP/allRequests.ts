@@ -33,7 +33,7 @@ export async function getUser(user: UserDataType): Promise<any> {
 
 export async function getTableData(): Promise<any> {
     const url: string = 'https://test.v5.pryaniky.com/ru/data/v3/testmethods/docs/userdocs/get';
-    const token: string = 'supersecrettoken_for_user8';
+    const token: string = 'supersecrettoken_for_user13';
     const result = axios.get(url, {
         headers: {
             'X-Auth-Token': token,

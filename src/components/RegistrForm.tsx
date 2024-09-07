@@ -23,7 +23,7 @@ const RegistrForm: FC = (props: Props) => {
         e.preventDefault();
         
         if (validation(e)) {
-            const user: string = dataPreparation({ username: 'user13', password: 'password' }, 1);
+            const user: string = dataPreparation({ username: 'user13', password: 'password' }, 0);
             const userToken = registrUser(user);
 
             userToken.then(function (respons) {
@@ -33,14 +33,15 @@ const RegistrForm: FC = (props: Props) => {
                 console.log(error);
             });
 
-            const table = getTableData();
+            // const table = getTableData();
 
-            table.then(function (respons) {
-                console.log(respons);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+            // table.then(function (respons) {
+            //     console.log(respons);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // })
+            
             // dispatch(addUser(userData));
             // dispatch(changeIsAuth(true));
             // localStorage.isAuth = true;
