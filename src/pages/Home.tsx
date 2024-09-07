@@ -23,13 +23,8 @@ const Home: FC = () => {
 
     useEffect(() => {
         const dataTable = getTableData();
-        
-        dataTable.then(
-            result => console.log(result),
-            error => console.log(error)
-        )
-        console.log();
-    })
+        console.log(dataTable);
+    }, []);
     
     return (
         <div className="entry-form">

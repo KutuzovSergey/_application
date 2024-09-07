@@ -1,6 +1,5 @@
 import React from "react";
 import MyButtonSmall from "../MyButtonSmall/MyButtonSmall.tsx";
-// import { useMyModal } from "../../../hooks/useMyModal.ts";
 
 import cl from "./MyModal.module.scss";
 
@@ -18,8 +17,6 @@ const MyModal:React.FC<Props> = ({children, ...props}: Props) =>{
     const modalClassBlock: string[] = [cl.myModal__block, cl.myModal__block_scroll];
     const disableClass: string[] = [cl.myModal__disable];
 
-    // const [ disable ] = useMyModal();
-
     if (props.active) {
         modalClass.push(cl.active);
         modalClassBlock.push(cl.active);
@@ -28,12 +25,6 @@ const MyModal:React.FC<Props> = ({children, ...props}: Props) =>{
     const closeMyModal = (): void => {
         props.setActive(false);
     }
-
-    // if (disable) {
-    //     disableClass.pop();
-    //     disableClass.push(cl.myModal__disable_active);
-    //     modalClassBlock.push(cl.myModal__block_scroll_none);
-    // }
     
     return (
         <div 

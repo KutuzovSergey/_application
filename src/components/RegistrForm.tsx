@@ -4,11 +4,11 @@ import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
 import { useRegistrAccount } from '../hooks/useRegistrAccount.ts';
 import { useDispatch } from 'react-redux';
-import { addUser, changeIsAuth } from '../action/actionCreators.ts';
+import { addUser, changeIsAuth, installToken } from '../action/actionCreators.ts';
 import { getTableData, registrUser } from '../AP/allRequests.ts';
+import { dataPreparation } from '../utils/createUserNumber.ts';
 
 import '../styles/componentStyles/loginForm.scss';
-import { dataPreparation } from '../utils/createUserNumber.ts';
 
 type Props = {
     active: boolean,
@@ -23,32 +23,21 @@ const RegistrForm: FC = (props: Props) => {
         e.preventDefault();
         
         if (validation(e)) {
-            const user: string = dataPreparation({ username: 'user13', password: 'password' }, 0);
+            const user: string = dataPreparation(userData, 13);
             const userToken = registrUser(user);
-
-            userToken.then(function (respons) {
-                console.log(respons);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-            // const table = getTableData();
-
-            // table.then(function (respons) {
-            //     console.log(respons);
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            // })
             
-            // dispatch(addUser(userData));
-            // dispatch(changeIsAuth(true));
-            // localStorage.isAuth = true;
-            // props.setActive(false);
-            // clearForm();
+            if (userToken !== '') {
+                dispatch(addUser(userData));
+                dispatch(changeIsAuth(true));
+                props.setActive(false);
+                clearForm();
+                dispatch(installToken(userToken));
+                localStorage.isAuth = true;
+            }
         }
     }
+
+    
 
     useEffect(() => {
         if (!props.active) {
