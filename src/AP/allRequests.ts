@@ -32,8 +32,7 @@ export async function getUser(user: UserDataType): Promise<any> {
     return result
 }
 
-export async function getTableData(): Promise<any> {
-    const userToken: string = useSelector((state: RootState) => state.userData.token);
+export async function getTableData(userToken: string): Promise<any> {
     const url: string = 'https://test.v5.pryaniky.com/ru/data/v3/testmethods/docs/userdocs/get';
 
     axios.get(url, {

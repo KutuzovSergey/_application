@@ -1,12 +1,23 @@
 import React from 'react';
-import loader from '../../../images/icon/loader.gif';
 
 import cl from './Loader.module.scss';
 
 const Loader:React.FC= () => {
     return (
         <div className={cl.loader}>
-            <img src={loader} alt="loader" className={cl.loader__image} />
+            <div className="undefined__block-button">
+                <div className="undefined__item undefined__item-button"></div>
+            </div>
+            <div className="undefined__block undefined__block-search">
+                <div className="undefined__item-search"></div>
+            </div>
+            <div className="undefined__block">
+                <div className="undefined__item"></div>
+                <div className="undefined__item"></div>
+                <div className="undefined__item"></div>
+                <div className="undefined__item"></div>
+                <div className="undefined__item"></div>
+            </div>
         </div>
     )
 }

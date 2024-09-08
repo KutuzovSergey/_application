@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import MyInput from '../components/UI/MyInput/MyInput.tsx';
 import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
@@ -18,32 +18,35 @@ type Props = {
 const RegistrForm: FC = (props: Props) => {
     const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useRegistrAccount();
     const dispatch = useDispatch();
+    const [userToken, setUserToken] = useState<string>('');
 
     const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
         e.preventDefault();
         
         if (validation(e)) {
             const user: string = dataPreparation(userData, 13);
-            const userToken = registrUser(user);
-            
-            if (userToken !== '') {
-                dispatch(addUser(userData));
-                dispatch(changeIsAuth(true));
-                props.setActive(false);
-                clearForm();
-                dispatch(installToken(userToken));
-                localStorage.isAuth = true;
-            }
+            setUserToken(registrUser(user));
         }
     }
-
-    
 
     useEffect(() => {
         if (!props.active) {
             clearForm();
         }
     }, [props.active]);
+
+    useEffect(() => {
+        if (userToken !== '') {
+            props.setActive(false);
+            clearForm();
+            dispatch(installToken(userToken));
+            dispatch(addUser(userData));
+            dispatch(changeIsAuth(true));
+            localStorage.userToken = installToken(userToken);
+        } else {
+            localStorage.userToken = '';
+        }
+    }, [userToken]);
 
     return (
         <div className="login-form">

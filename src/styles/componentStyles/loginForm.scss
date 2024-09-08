@@ -6,6 +6,7 @@
     margin: auto;
     background-color: $background_block;
     display: flex;
+    border-radius: 10px;
 
         &__wtapper {
             @include blockContent(500px, auto, auto, flex, center, space-around);

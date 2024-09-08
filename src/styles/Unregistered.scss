@@ -10,5 +10,8 @@
         margin: 100px auto 0 auto;
         background-color: $background_;
         border-radius: 30px;
+        @media (max-width: 1300px) {
+        width: 90%;
+      }
     }
 }

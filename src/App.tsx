@@ -9,11 +9,14 @@ import './styles/App.scss';
 function App() {
   const dispatch = useDispatch();
   const setUserStatus = () => {
-    if (localStorage.getItem('isAuth') !== null) {
-      const valueIsAuth: string = localStorage.getItem('isAuth')!;
-      dispatch(changeIsAuth(JSON.parse(valueIsAuth)));
+    if (localStorage.getItem('userToken') !== null) {
+      if(localStorage.getItem('userToken') === ''){
+           dispatch(changeIsAuth(false));
+       } else {
+         dispatch(changeIsAuth(true));
+       }
     } else {
-      localStorage.setItem('isAuth', 'false');
+      localStorage.setItem('userToken', '');
     }
   }
 

@@ -11,8 +11,10 @@ import { getTableData } from '../AP/allRequests.ts';
 import '../styles/Home.scss';
 
 const Home: FC = () => {
-    const userName: string = useSelector((state: RootState) => state.userData.username)
+    const userName: string = useSelector((state: RootState) => state.userData.username);
+    const userToken: string = useSelector((state: RootState) => state.userData.token);
     const { newEntry, chengePost, addPost, } = useAddPost();
+    
     const dispatch = useDispatch();
 
     const exitApp = (): void => {
@@ -22,8 +24,14 @@ const Home: FC = () => {
     }
 
     useEffect(() => {
-        const dataTable = getTableData();
-        console.log(dataTable);
+        if (userToken !== '') {
+            const dataTable = getTableData(userToken);
+            console.log(dataTable);
+            console.log(userToken);
+            console.log(localStorage);
+        } else {
+            alert('undefined');
+        }
     }, []);
     
     return (

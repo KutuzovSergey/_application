@@ -5,22 +5,31 @@
     flex-direction: column;
     padding: 20px 30px;
     background-color: $background_block;
+      @media (max-width: 1300px) {
+            width: 95%;
+      }
 
 		&__exit {
             @include blockContent(100%, auto, 0px, flex, center, end);
 
 		}
 
-		&__user-name {
-		}
+            &__user-name {
+            }
 
-		&__add-post {
-            @include blockContent(1000px, 200px, auto, flex, center, space-around);
-		}
+            &__add-post {
+                  @include blockContent(1000px, 200px, auto, flex, center, space-around);
+                  @media (max-width: 1300px) {
+                        width: 80%;
+                  }
+            }
 
 		&__data {
-            @include blockContent(1000px, 500px, auto, flex, center, space-around);
-            background-color: $background_;
-            flex-direction: column;
+                  @include blockContent(1000px, 500px, auto, flex, center, space-around);
+                  background-color: $background_;
+                  flex-direction: column;
+                  @media (max-width: 1300px) {
+                        width: 80%;
+                  }
 		}
 }
