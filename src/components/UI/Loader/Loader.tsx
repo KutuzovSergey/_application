@@ -2,22 +2,28 @@ import React from 'react';
 
 import cl from './Loader.module.scss';
 
-const Loader:React.FC= () => {
+const Loader: React.FC = () => {
     return (
         <div className={cl.loader}>
-            <div className="undefined__block-button">
-                <div className="undefined__item undefined__item-button"></div>
+            <div className={cl.loader__block_button}>
+                <div className={cl.loader__item_button}></div>
             </div>
-            <div className="undefined__block undefined__block-search">
-                <div className="undefined__item-search"></div>
+            <div className={cl.loader__block_search}>
+                <div className={cl.loader__item_search}>
+                    <div className={cl.loader__search}></div>
+                </div>
             </div>
-            <div className="undefined__block">
-                <div className="undefined__item"></div>
-                <div className="undefined__item"></div>
-                <div className="undefined__item"></div>
-                <div className="undefined__item"></div>
-                <div className="undefined__item"></div>
+            <div className={cl.loader__block_table}>
+                <div className={cl.loader__item}>
+                    <div className={cl.loader__item}></div>
+                </div>
+                <div className = {cl.loader__item} ></div>
+                <div className = {cl.loader__item}></div>
+                <div className = {cl.loader__item} ></div>
+                <div className={cl.loader__item}></div>
             </div>
+            <span className={cl.loader__animation}></span>
+            
         </div>
     )
 }

@@ -1,6 +1,6 @@
-import { changeIsAuthConst, userConst, InstallTokenConst } from "../constants/constants.ts";
+import { changeIsAuthConst, userConst, InstallTokenConst, InstallUserConst } from "../constants/constants.ts";
 import { UserDataType } from "../type/typesHooks.ts";
-import { UserActionType } from "../type/typesStore.ts";
+import { StateUserType, UserActionType } from "../type/typesStore.ts";
 
 // авторизация пользователя
 export const changeIsAuth = (isAuth: boolean): UserActionType => {
@@ -27,6 +27,13 @@ export const deleteUser = (userData: UserDataType): UserActionType => {
 export const installToken = (userData: string): UserActionType => {
     return {
         type: InstallTokenConst.INSTALL_TOKEN,
+        userData: userData
+    }
+}
+
+export const installUser = (userData: StateUserType): UserActionType => {
+    return {
+        type: InstallUserConst.INSTALL_USER,
         userData: userData
     }
 }

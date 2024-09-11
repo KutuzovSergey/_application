@@ -1,13 +1,18 @@
 @import './Main.scss';
 
 .entry-form {
-    @include blockContent(1200px, auto, auto, flex, center, space-around);
-    flex-direction: column;
-    padding: 20px 30px;
-    background-color: $background_block;
-      @media (max-width: 1300px) {
-            width: 95%;
-      }
+    width: 100%;
+    height: auto;
+
+            &__wrapper{
+                  @include blockContent(1200px, auto, auto, flex, center, space-around);
+                  flex-direction: column;
+                  padding: 20px 30px;
+                  background-color: $background_block;
+                  @media (max-width: 1300px) {
+                        width: 95%;
+                  }
+            }
 
 		&__exit {
             @include blockContent(100%, auto, 0px, flex, center, end);

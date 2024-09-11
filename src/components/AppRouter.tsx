@@ -1,13 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Route, Routes, } from "react-router-dom";
 import {privateRouters, publicRouters } from "../router/index.tsx";
 import { useSelector } from "react-redux";
-import { RootState } from "..";
+import { StateUserType } from "../type/typesStore.ts";
 
 
 const AppRouter: FC = () => {
-    const isAuth: boolean = useSelector((state: RootState) => state.userData.isAuth);
-   
+    const isAuth: boolean = useSelector((state: StateUserType) => state.userData.isAuth);
+    // const isAuth: boolean = 
+
     return (
         isAuth
             ?

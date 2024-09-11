@@ -1,4 +1,4 @@
-import { userConst, changeIsAuthConst, InstallTokenConst } from '../constants/constants.ts';
+import { userConst, changeIsAuthConst, InstallTokenConst, InstallUserConst } from '../constants/constants.ts';
 import { UserActionType, StateUserType } from '../type/typesStore.ts';
 
 const defaultState: StateUserType = {
@@ -20,6 +20,8 @@ export const userDataReducer = (state = defaultState, action: UserActionType) =>
             return { ...defaultState, isAuth: action.userData }
         case InstallTokenConst.INSTALL_TOKEN:
             return { ...defaultState, token: action.userData }
+        case InstallUserConst.INSTALL_USER:
+            return { ...action.userData }
         default:
             return state
     }

@@ -10,16 +10,18 @@ function App() {
   const dispatch = useDispatch();
   const setUserStatus = () => {
     if (localStorage.getItem('userToken') !== null) {
+      // console.log(localStorage.getItem('userToken'));
       if(localStorage.getItem('userToken') === ''){
-           dispatch(changeIsAuth(false));
+          dispatch(changeIsAuth(false));
        } else {
-         dispatch(changeIsAuth(true));
+        dispatch(changeIsAuth(true));
        }
     } else {
       localStorage.setItem('userToken', '');
+      dispatch(changeIsAuth(false));
     }
   }
-
+  // localStorage.userToken = ''
   useEffect(() => { setUserStatus() }, []);
 
   return (

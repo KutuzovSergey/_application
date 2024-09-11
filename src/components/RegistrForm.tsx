@@ -3,10 +3,12 @@ import MyInput from '../components/UI/MyInput/MyInput.tsx';
 import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
 import { useRegistrAccount } from '../hooks/useRegistrAccount.ts';
-import { useDispatch } from 'react-redux';
-import { addUser, changeIsAuth, installToken } from '../action/actionCreators.ts';
-import { getTableData, registrUser } from '../AP/allRequests.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, changeIsAuth, installToken, installUser } from '../action/actionCreators.ts';
+import { getTableData, authorizationsUser } from '../AP/allRequests.ts';
 import { dataPreparation } from '../utils/createUserNumber.ts';
+import { StateUserType } from '../type/typesStore.ts';
+import { collectingUserObject } from '../utils/collectingUserObject.ts';
 
 import '../styles/componentStyles/loginForm.scss';
 
@@ -17,6 +19,7 @@ type Props = {
 
 const RegistrForm: FC = (props: Props) => {
     const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useRegistrAccount();
+    const token = useSelector((state: StateUserType) => state.userData);
     const dispatch = useDispatch();
     const [userToken, setUserToken] = useState<string>('');
 
@@ -25,7 +28,12 @@ const RegistrForm: FC = (props: Props) => {
         
         if (validation(e)) {
             const user: string = dataPreparation(userData, 13);
-            setUserToken(registrUser(user));
+            authorizationsUser(user).then(function (respons) {
+                setUserToken(respons.data.data.token); 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         }
     }
 
@@ -36,15 +44,13 @@ const RegistrForm: FC = (props: Props) => {
     }, [props.active]);
 
     useEffect(() => {
-        if (userToken !== '') {
+        if (userToken !== '' && typeof userToken === 'string') {
+            dispatch(installUser(collectingUserObject(userData, userToken, true)));
             props.setActive(false);
             clearForm();
-            dispatch(installToken(userToken));
-            dispatch(addUser(userData));
-            dispatch(changeIsAuth(true));
-            localStorage.userToken = installToken(userToken);
-        } else {
-            localStorage.userToken = '';
+            localStorage.userToken = userToken;
+            localStorage.isAuth = true;
+            console.log(token);
         }
     }, [userToken]);
 
