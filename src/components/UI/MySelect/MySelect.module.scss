@@ -1,0 +1,14 @@
+@import '../../../styles/Main.scss';
+
+.select{
+    @include data_entry_form(100%, 40px, $color, 0.9em, 5px 15px, $background_color, 3px);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../../../images/icon/arrowIcons.png');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+}
+
+// arrowIcons.png

@@ -10,15 +10,17 @@ import { getTableData, authorizationsUser } from '../AP/allRequests.ts';
 import Loader from '../components/UI/Loader/Loader.tsx';
 import { StateUserType } from '../type/typesStore.ts';
 import { store } from '../store/index.ts';
+import TableCell from '../components/TableCell.tsx';
+import { TableCellsType } from '../type/typesMain.ts';
 
 import '../styles/Home.scss';
 
 const Home: FC = () => {
     const userName: string = useSelector((state: StateUserType) => state.userData.username);
-    // const userToken: string = useSelector((state: StateUserType): string => state.userData.token);
     const userToken: string = localStorage.getItem('userToken');
     const { newEntry, chengePost, addPost, } = useAddPost();
     const [isLoader, setLoader] = useState<boolean>(true);
+    const [tableCells, serTableCells] = useState<TableCellsType>();
     
     const dispatch = useDispatch();
 
@@ -29,26 +31,17 @@ const Home: FC = () => {
     }
 
     store.subscribe(() => console.log(store.getState()));
-    // setLoader(false);
+
     useEffect(() => {
-        // console.log(userToken);
         if (userToken !== '') {
-            // authorizationsUser(userToken).then(function (respons) {
-            //     console.log(respons);
-            // })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
             getTableData(userToken).then(function (respons) {
                 console.log(respons.data.data);
-                return respons.data
+                serTableCells(respons.data.data);
+                setLoader(false);
             })
                 .catch(function (error) {
                     console.log(error);
-                    return ''
                 });
-            // console.log(userToken);
-            setLoader(false);
         } else {
             setLoader(true);
         }
@@ -75,7 +68,13 @@ const Home: FC = () => {
                             onChange={chengePost} />
                         <MyButton onClick={addPost}>Добавить</MyButton>
                     </div>
-                    <div className="entry-form__data"></div>
+                    <div className="entry-form__data">
+                        {
+                            tableCells.map(cell => 
+                                <TableCell cell={cell} key={cell.id}/>
+                            )
+                        }
+                    </div>
                 </div>
             }
         </div>

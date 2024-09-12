@@ -1,0 +1,25 @@
+@import './../Main.scss';
+
+.table-cell {
+         @include blockContent(100%, auto, auto, flex, center, space-around);
+        &__data {
+        }
+
+        &__status {
+        }
+
+        &__document-type {
+        }
+
+        &__number {
+        }
+
+        &__formats {
+        }
+
+        &__download {
+        }
+
+        &__delete {
+        }
+}
