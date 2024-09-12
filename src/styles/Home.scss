@@ -2,15 +2,22 @@
 
 .entry-form {
     width: 100%;
-    height: auto;
+    height: 100%;
 
             &__wrapper{
-                  @include blockContent(1200px, auto, auto, flex, center, space-around);
+                  @include blockContent(1200px, 100%, auto, flex, center, space-around);
                   flex-direction: column;
                   padding: 20px 30px;
                   background-color: $background_block;
                   @media (max-width: 1300px) {
                         width: 95%;
+                  }
+                  @media (max-width: 700px) {
+                        width: 100%;
+                        padding: 10px;
+                  }
+                  @media (max-width: 350px) {
+                        padding: 0px;
                   }
             }
 
@@ -23,18 +30,28 @@
             }
 
             &__add-post {
-                  @include blockContent(1000px, 200px, auto, flex, center, space-around);
+                  @include blockContent(90%, auto, 20px auto, flex, center, normal);
                   @media (max-width: 1300px) {
                         width: 80%;
                   }
             }
 
 		&__data {
-                  @include blockContent(1000px, 500px, auto, flex, center, space-around);
+                  @include blockContent(1000px, 100%, auto, flex, center, normal);
                   background-color: $background_;
+                  border-radius: 10px;
                   flex-direction: column;
+                  padding: 20px 30px;
                   @media (max-width: 1300px) {
-                        width: 80%;
+                        width: 90%;
+                  }
+                  @media (max-width: 700px) {
+                        width: 100%;
+                        padding: 20px 20px;
+                  }
+                  @media (max-width: 400px) {
+                        width: 100%;
+                        padding: 0px;
                   }
 		}
 }

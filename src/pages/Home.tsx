@@ -1,17 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../index.tsx';
 import Button from '@mui/material/Button';
-import MyButton from '../components/UI/MyButton/MyButton.tsx';
-import MyTextarea from '../components/UI/MyTextarea/MyTextarea.tsx';
 import { useAddPost } from '../hooks/useAddPost.ts';
 import { changeIsAuth, addUser } from '../action/actionCreators.ts';
-import { getTableData, authorizationsUser } from '../AP/allRequests.ts';
+import { getTableData } from '../AP/allRequests.ts';
 import Loader from '../components/UI/Loader/Loader.tsx';
 import { StateUserType } from '../type/typesStore.ts';
 import { store } from '../store/index.ts';
 import TableCell from '../components/TableCell.tsx';
 import { TableCellsType } from '../type/typesMain.ts';
+import MyModal from '../components/UI/MyModal/MyModal.tsx';
+import AddPostForm from '../components/AddPostForm.tsx';
 
 import '../styles/Home.scss';
 
@@ -21,6 +20,7 @@ const Home: FC = () => {
     const { newEntry, chengePost, addPost, } = useAddPost();
     const [isLoader, setLoader] = useState<boolean>(true);
     const [tableCells, serTableCells] = useState<TableCellsType>();
+    const [modalAddPost, setModalAddPost] = useState<boolean>(false);
     
     const dispatch = useDispatch();
 
@@ -28,6 +28,10 @@ const Home: FC = () => {
         dispatch(changeIsAuth(false));
         dispatch(addUser({username: '',  password: ''}));
         localStorage.userToken = '';
+    }
+
+    const openWindow = (): void => {
+        setModalAddPost(true);
     }
 
     store.subscribe(() => console.log(store.getState()));
@@ -62,11 +66,12 @@ const Home: FC = () => {
                         <span>{userName}</span>
                     </div>
                     <div className="entry-form__add-post">
-                        <MyTextarea
+                        {/* <MyTextarea
                             value={newEntry}
                             placeholder="текст записи"
-                            onChange={chengePost} />
-                        <MyButton onClick={addPost}>Добавить</MyButton>
+                            onChange={chengePost} /> */}
+                        <Button variant="contained" size="large" onClick={openWindow}>Добавить</Button>
+                        {/* <MyButton onClick={addPost}>Добавить</MyButton> */}
                     </div>
                     <div className="entry-form__data">
                         {
@@ -77,6 +82,11 @@ const Home: FC = () => {
                     </div>
                 </div>
             }
+            <MyModal
+                active={modalAddPost}
+                setActive={setModalAddPost}>
+                <AddPostForm active={modalAddPost} setActive={setModalAddPost} />
+            </MyModal>
         </div>
     )
 }

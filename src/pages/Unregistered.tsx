@@ -8,8 +8,8 @@ import '../styles/Unregistered.scss';
 
 const Unregistered: FC = () => {
     
-    const [modalLogin, setModalLogin] = useState(false);
-    const [modalRegistr, setModalRegistr] = useState(false);
+    const [modalLogin, setModalLogin] = useState<boolean>(false);
+    const [modalRegistr, setModalRegistr] = useState<boolean>(false);
 
     const makeEntrance = () => {
         setModalLogin(true);

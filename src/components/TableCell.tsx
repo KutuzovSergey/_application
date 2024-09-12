@@ -34,33 +34,43 @@ const TableCell: FC = (props: Props) => {
 
     return (
         <div className="table-cell" id={props.cell.id}>
-            <div className="table-cell__data">
-                <span>Дата: {props.cell.companySigDate}</span>
+            <div className="table-cell__info">
+                <div className="table-cell__wrapper">
+                    <div className="table-cell__data table-cell__block">
+                        <span>Дата: {props.cell.companySigDate}</span>
+                    </div>
+                    <div className="table-cell__status table-cell__block">
+                        <span>Статус: {props.cell.documentStatus}</span>
+                    </div>
+                </div>
+                <div className="table-cell__wrapper">
+                    <div className="table-cell__document-type table-cell__block">
+                        <span>{props.cell.documentType}</span>
+                    </div>
+                    <div className="table-cell__number table-cell__block">
+                        <span>Номер документа: {props.cell.employeeNumber}</span>
+                    </div>
+                </div>
             </div>
-            <div className="table-cell__status">
-                <span>Статус: {props.cell.documentStatus}</span>
-            </div>
-            <div className="table-cell__document-type">
-                <span>{props.cell.documentType}</span>
-            </div>
-            <div className="table-cell__number">
-                <span>Номер документа: {props.cell.documentType}</span>
-            </div>
-            <div className="table-cell__formats">
-                <MySelect
-                    value=''
-                    options={optionFotmats}
-                    defaultValue={'выберите формат'}
-                    onChange={selectFormat} />
-            </div>
-            <div className="table-cell__download">
-                <Button>скачать</Button>
-            </div>
-            <div className="table-cell__delete">
-                <IconButton aria-label="fingerprint" color="secondary">
-                    <ClearIcon />
-                </IconButton>
-                {/* <Button variant="outlined" color="error" endIcon={<SendIcon />}></Button> */}
+            
+            <div className="table-cell__tools">
+                <div className="table-cell__formats">
+                    <MySelect
+                        value=''
+                        options={optionFotmats}
+                        defaultValue={'выберите формат'}
+                        onChange={selectFormat} />
+                </div>
+                <div className="table-cell__button">
+                    <div className="table-cell__delete">
+                        <IconButton aria-label="fingerprint" color="secondary">
+                            <ClearIcon />
+                        </IconButton>
+                    </div>
+                    <div className="table-cell__download">
+                        <Button>скачать</Button>
+                    </div>
+                </div>
             </div>
         </div>
     )
