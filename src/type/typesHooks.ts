@@ -1,11 +1,5 @@
 import { FormEvent, ChangeEvent } from 'react';
-
-export type UseAddPostType = {
-   newEntry: string,
-   chengePost: (e: ChangeEvent<HTMLInputElement>) => void,
-   addPost: () => void,
-}
-
+import { TableCellType } from './typesMain';
 
 // Вход на сайт
 export type UserDataType = {
@@ -58,4 +52,37 @@ export type UseRegistrAccountType = [
    changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
    validation: (e: FormEvent<HTMLInputElement>) => boolean,
    clearForm: () => void,
+]
+
+// добавление новой записи
+
+export type ErrorStatusPostType = {
+   errorName: boolean,
+   errorNumber: boolean,
+   errorStatus: boolean
+}
+
+export type ErrorTextPostType = {
+   errorName: string,
+   errorNumber: string,
+   errorStatus: string
+}
+
+export type CheckboxFormatType = {
+   pdf: boolean,
+   sig: boolean,
+   txt: boolean,
+}
+
+export type useAddPostType = [
+   newDocument: TableCellType,
+    errorStatus: ErrorStatusPostType,
+   errorText: ErrorTextPostType,
+   checkboxFormat: CheckboxFormatType,
+   changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
+   validation: (e: FormEvent<HTMLInputElement>) => boolean,
+   chengePost: (e: ChangeEvent<HTMLInputElement>) => void,
+   clearForm: () => void,
+   addPost: () => void,
+   selectFormat: (e: ChangeEvent<HTMLInputElement>) => void
 ]

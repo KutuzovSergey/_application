@@ -7,7 +7,7 @@ import { useLoginAccount } from '../hooks/useLoginAccount.ts';
 import { useDispatch } from 'react-redux';
 import { addUser, changeIsAuth } from '../action/actionCreators.ts';
 
-import '../styles/componentStyles/loginForm.scss';
+import '../styles/componentStyles/Form.scss';
 
 type Props = {
     active: boolean,
@@ -38,14 +38,14 @@ useEffect(() => {
 }, [props.active]);
 
 return (
-    <div className="login-form">
-        <div className="login-form__block">
-            <span className="login-form__title">Войти</span>
+    <div className="form">
+        <div className="form__block">
+            <span className="form__title">Войти</span>
         </div>
-        <form className="login-form__wtapper" onSubmit={submittingForm}>
-            <div className="login-form__block">
-                <div className="login-form__label-block">
-                    <label htmlFor="UserName" className="login-form__label">User name</label>
+        <form className="form__wtapper" onSubmit={submittingForm}>
+            <div className="form__block">
+                <div className="form__label-block">
+                    <label htmlFor="UserName" className="form__label">User name</label>
                 </div>
                 <MyInput
                     type='text'
@@ -55,8 +55,8 @@ return (
                     onChange={changeInput} />
                 <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorName}>{errorText.errorName}</ErrorForm>
             </div>
-            <div className="login-form__block">
-                <div className="login-form__label-block">
+            <div className="form__block">
+                <div className="form__label-block">
                     <label htmlFor="UserPassword " className="login-form__label">Password</label>
                 </div>
                 <MyInput
@@ -67,7 +67,7 @@ return (
                     onChange={changeInput} />
                 <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorPassword}>{errorText.errorPassword}</ErrorForm>
             </div>
-            <div className="login-form__button">
+            <div className="form__button">
                 <MyButton>вход</MyButton>
             </div>
         </form>

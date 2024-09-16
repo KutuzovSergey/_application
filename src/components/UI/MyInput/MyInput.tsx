@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, { FC, ChangeEvent } from "react";
 
 import cl from './MyInput.module.scss';
 
@@ -7,7 +7,7 @@ type Props = {
     name: string,
     value: string,
     placeholder: string,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
     onFocus?: () => void,
     autoComplete?: string,
 }

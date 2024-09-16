@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import { useAddPost } from '../hooks/useAddPost.ts';
 import { changeIsAuth, addUser } from '../action/actionCreators.ts';
 import { getTableData } from '../AP/allRequests.ts';
 import Loader from '../components/UI/Loader/Loader.tsx';
@@ -17,7 +16,6 @@ import '../styles/Home.scss';
 const Home: FC = () => {
     const userName: string = useSelector((state: StateUserType) => state.userData.username);
     const userToken: string = localStorage.getItem('userToken');
-    const { newEntry, chengePost, addPost, } = useAddPost();
     const [isLoader, setLoader] = useState<boolean>(true);
     const [tableCells, serTableCells] = useState<TableCellsType>();
     const [modalAddPost, setModalAddPost] = useState<boolean>(false);
@@ -39,7 +37,6 @@ const Home: FC = () => {
     useEffect(() => {
         if (userToken !== '') {
             getTableData(userToken).then(function (respons) {
-                console.log(respons.data.data);
                 serTableCells(respons.data.data);
                 setLoader(false);
             })
@@ -66,12 +63,7 @@ const Home: FC = () => {
                         <span>{userName}</span>
                     </div>
                     <div className="entry-form__add-post">
-                        {/* <MyTextarea
-                            value={newEntry}
-                            placeholder="текст записи"
-                            onChange={chengePost} /> */}
                         <Button variant="contained" size="large" onClick={openWindow}>Добавить</Button>
-                        {/* <MyButton onClick={addPost}>Добавить</MyButton> */}
                     </div>
                     <div className="entry-form__data">
                         {

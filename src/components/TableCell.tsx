@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Button from '@mui/material/Button';
 import { IconButton } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import { OptionsSelectType, TableCellType } from "../type/typesMain.ts";
 import MySelect from "../components/UI/MySelect/MySelect.tsx";
+import MyModal from "./UI/MyModal/MyModal.tsx";
 
 import '../styles/componentStyles/TableCell.scss';
 
@@ -12,6 +13,11 @@ type Props = {
 }
 
 const TableCell: FC = (props: Props) => {
+    const [modalInfo, setModalInfo] = useState<boolean>(false);
+
+    const openModalInfo = () => {
+        setModalInfo(true);
+    }
 
     const optionFotmats: OptionsSelectType[] = [
         {
@@ -21,10 +27,6 @@ const TableCell: FC = (props: Props) => {
         {
             name: props.cell.documentName,
             value: props.cell.documentName
-        },
-        {
-            name: props.cell.employeeSignatureName,
-            value: props.cell.employeeSignatureName
         },
     ]
 
@@ -68,10 +70,20 @@ const TableCell: FC = (props: Props) => {
                         </IconButton>
                     </div>
                     <div className="table-cell__download">
-                        <Button>скачать</Button>
+                        <Button onClick={() => openModalInfo()}>скачать</Button>
+                    </div>
+                    <div className="table-cell__download">
+                        <Button>изменить</Button>
                     </div>
                 </div>
             </div>
+            <MyModal
+                active={modalInfo}
+                setActive={setModalInfo}>
+                <div className="table-cell__window-info">
+                        <span>Эта функция пока не доступна</span>
+                    </div>
+                </MyModal>
         </div>
     )
 }

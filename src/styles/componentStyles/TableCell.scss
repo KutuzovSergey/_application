@@ -88,6 +88,8 @@
         }
 
         &__button{
+                @include blockContent(auto, auto, 0px, flex, center, center);
+                flex-direction: column;
                 @media (max-width: 900px) {
                         right: 0;
                         top: 0;
@@ -97,5 +99,12 @@
 
         &__delete {
                 @include blockContent(100%, 100%, auto, flex, center, center);
+        }
+
+        &__window-info{
+                @include blockContent(400px, 90px, auto, flex, center, center);
+                background-color: rgba(0, 0, 0, 0.554);
+                border-radius: 10px;
+                @include text($color, 1.2rem, 700, 20px, left);
         }
 }

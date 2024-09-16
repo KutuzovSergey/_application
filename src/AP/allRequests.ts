@@ -1,6 +1,10 @@
 import axios from 'axios';
-import { UserDataType } from '../type/typesHooks.ts';
-import RequestServer from './RequestServer.ts';
+import { TableCellType } from '../type/typesMain';
+
+
+export const createData: string = '/ru/data/v3/testmethods/docs/userdocs/create';
+export const deleteData: string = '/ru/data/v3/testmethods/docs/userdocs/delete/';
+export const changeData: string = '/ru/data/v3/testmethods/docs/userdocs/set/';
 
 export async function authorizationsUser(user: string): Promise<any> {
     const URL = 'https://test.v5.pryaniky.com/ru/data/v3/testmethods/docs/login';
@@ -18,21 +22,10 @@ export async function authenticationUser(userToken: string): Promise<any> {
 
     const result = await axios.get(URL, {
         headers: {
-            'X-Auth-Token': userToken,
+            'x-auth': userToken,
         }
     });
 
-    return result
-}
-
-export async function getUser(user: UserDataType): Promise<any> {
-    const url: string = 'https://test.v5.pryaniky.com';
-    const get: string = 'POST';
-    const param: string = '/ru/data/v3/testmethods/docs/login';
-    const json = JSON.stringify(user);
-
-    const result: any = await RequestServer.sendRequest(get, url, param, json);
-    
     return result
 }
 
@@ -45,4 +38,16 @@ export async function getTableData(userToken: string): Promise<any> {
     };
 
     return axios.get(url, config)
+}
+
+export async function workingWithTableData(userToken: string, idData: string, actionUrl: string, data: TableCellType): Promise<any> {
+     const url: string = 'https://test.v5.pryaniky.com/ru/data/v3/testmethods/docs/userdocs/set/';
+    const config = {
+        headers: {
+            'x-auth': userToken,
+            'Content-Type': 'application/json'
+        }
+    };
+
+    return axios.post(`${url}${actionUrl}${idData}`, data, config)
 }

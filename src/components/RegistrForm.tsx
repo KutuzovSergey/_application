@@ -10,7 +10,7 @@ import { dataPreparation } from '../utils/createUserNumber.ts';
 import { StateUserType } from '../type/typesStore.ts';
 import { collectingUserObject } from '../utils/collectingUserObject.ts';
 
-import '../styles/componentStyles/loginForm.scss';
+import '../styles/componentStyles/Form.scss';
 
 type Props = {
     active: boolean,
@@ -50,19 +50,18 @@ const RegistrForm: FC = (props: Props) => {
             clearForm();
             localStorage.userToken = userToken;
             localStorage.isAuth = true;
-            console.log(token);
         }
     }, [userToken]);
 
     return (
-        <div className="login-form">
-            <div className="login-form__block">
-                <span className="login-form__title">Регистрация</span>
+        <div className="form">
+            <div className="form__block">
+                <span className="form__title">Регистрация</span>
             </div>
-            <form className="login-form__wtapper" onSubmit={submittingForm}>
-                <div className="login-form__block">
-                    <div className="login-form__label-block">
-                        <label htmlFor="UserName" className="login-form__label">User name</label>
+            <form className="form__wtapper" onSubmit={submittingForm}>
+                <div className="form__block">
+                    <div className="form__label-block">
+                        <label htmlFor="UserName" className="form__label">User name</label>
                     </div>
                     <MyInput
                         type='text'
@@ -72,9 +71,9 @@ const RegistrForm: FC = (props: Props) => {
                         onChange={changeInput} />
                     <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorName}>{errorText.errorName}</ErrorForm>
                 </div>
-                <div className="login-form__block">
-                    <div className="login-form__label-block">
-                        <label htmlFor="UserPassword " className="login-form__label">Password</label>
+                <div className="form__block">
+                    <div className="form__label-block">
+                        <label htmlFor="UserPassword " className="form__label">Password</label>
                     </div>
                     <MyInput
                         type='password'
@@ -84,8 +83,8 @@ const RegistrForm: FC = (props: Props) => {
                         onChange={changeInput} />
                     <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorPassword}>{errorText.errorPassword}</ErrorForm>
                 </div>
-                <div className='login-form__block'>
-                    <div className="login-form__label-block">
+                <div className='form__block'>
+                    <div className="form__label-block">
                         <label htmlFor='RepeatPassword' className='login-form__label'>Repeat Password</label>
                     </div>
                     <MyInput
@@ -96,7 +95,7 @@ const RegistrForm: FC = (props: Props) => {
                         onChange={changeInput} />
                     <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorRepeatPassword}>{errorText.errorRepeatPassword}</ErrorForm>
                 </div>
-                <div className="login-form__button">
+                <div className="form__button">
                     <MyButton>вход</MyButton>
                 </div>
             </form>

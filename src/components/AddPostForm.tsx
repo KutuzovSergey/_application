@@ -2,12 +2,9 @@ import { FC, FormEvent, useEffect } from 'react';
 import MyInput from './UI/MyInput/MyInput.tsx';
 import ErrorForm from './UI/ErrorForm/ErrorForm.tsx';
 import MyButton from './UI/MyButton/MyButton.tsx';
-import { useLoginAccount } from '../hooks/useLoginAccount.ts';
-// import { UseLoginAccountType } from '../type/typesHooks.ts';
-import { useDispatch } from 'react-redux';
-import { addUser, changeIsAuth } from '../action/actionCreators.ts';
+import { useAddPost } from '../hooks/useAddPost.ts';
 
-import '../styles/componentStyles/AddPostForm.scss';
+import '../styles/componentStyles/Form.scss';
 
 type Props = {
     active: boolean,
@@ -15,19 +12,15 @@ type Props = {
 }
 
 const AddPostForm: FC = (props: Props) => {
-    const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useLoginAccount();
 
-    const dispatch = useDispatch();
+    const [newDocument, errorStatus, errorText, checkboxFormat, validation, chengePost, clearForm, addPost] = useAddPost();
 
     const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
         e.preventDefault();
 
         if (validation(e)) {
-            dispatch(addUser(userData));
-            dispatch(changeIsAuth(true));
-            localStorage.userToken = '';
-        props.setActive(false);
-        clearForm();
+            addPost();
+            clearForm();
     }
 }
 
@@ -38,36 +31,76 @@ useEffect(() => {
 }, [props.active]);
 
 return (
-    <div className="login-form">
-        <div className="login-form__block">
-            <span className="login-form__title">Войти</span>
+    <div className="form">
+        <div className="form__block">
+            <span className="form__title">Добавить новый документ</span>
         </div>
-        <form className="login-form__wtapper" onSubmit={submittingForm}>
-            <div className="login-form__block">
-                <div className="login-form__label-block">
-                    <label htmlFor="UserName" className="login-form__label">User name</label>
+        <form className="form__wtapper" onSubmit={submittingForm}>
+
+            <div className="form__block">
+                <div className="form__label-block">
+                    <label htmlFor="documentType" className="form__label">Наименование документа</label>
                 </div>
                 <MyInput
                     type='text'
-                    name='UserName'
-                    value={userData.userName}
-                    placeholder='Ваше имя'
-                    onChange={changeInput} />
+                    name='documentName'
+                    value={newDocument.documentName}
+                    placeholder='например: Трудовой договор'
+                    onChange={chengePost} />
                 <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorName}>{errorText.errorName}</ErrorForm>
             </div>
-            <div className="login-form__block">
-                <div className="login-form__label-block">
-                    <label htmlFor="UserPassword " className="login-form__label">Password</label>
+
+            <div className="form__block">
+                <div className="form__label-block">
+                    <label htmlFor="documentType" className="form__label">Номер документа</label>
                 </div>
                 <MyInput
-                    type='password'
-                    name='UserPassword'
-                    value={userData.userPassword}
-                    placeholder='Пароль'
-                    onChange={changeInput} />
-                <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorPassword}>{errorText.errorPassword}</ErrorForm>
+                    type='text'
+                    name='documentType'
+                    value={newDocument.employeeNumber}
+                    placeholder='номер'
+                    onChange={chengePost} />
+                <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorNumber}>{errorText.errorNumber}</ErrorForm>
             </div>
-            <div className="login-form__button">
+
+            <div className="form__block">
+                <div className="form__label-block">
+                    <label htmlFor="UserPassword " className="form__label">Статус документа</label>
+                </div>
+                <MyInput
+                    type='text'
+                    name='documentStatus'
+                    value={newDocument.documentStatus}
+                    placeholder='Статус'
+                    onChange={chengePost} />
+                <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorStatus}>{errorText.errorStatus}</ErrorForm>
+            </div>
+
+            <div className="form__block">
+                <div className="form__block-titel">
+                    <span className='form__label'>Выберите доступные форматы</span>
+                </div>
+
+                <div className="form__formats">
+                    <div className="form__format">
+                        <input type="checkbox" checked={checkboxFormat.pdf} id="pdf" value=".pdf" name="format_pdf" onChange={chengePost} />
+                        <label className="form__label-checkbox" htmlFor="format_pdf">.pdf</label>
+                    </div>
+
+                    <div className="form__format">
+                        <input type="checkbox" checked={checkboxFormat.sig} id="sig" value=".sig" name="sig" onChange={chengePost} />
+                        <label className="form__label-checkbox" htmlFor="format_sig">.sig</label>
+                    </div>
+
+                    <div className="form__format">
+                        <input type="checkbox" checked={checkboxFormat.txt} id="name" value=".txt" name="txt" onChange={chengePost} />
+                        <label className="form__label-checkbox" htmlFor="format_txt">.txt</label>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div className="form__button">
                 <MyButton>вход</MyButton>
             </div>
         </form>
