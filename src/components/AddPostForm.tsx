@@ -78,12 +78,12 @@ return (
 
             <div className="form__block">
                 <div className="form__block-titel">
-                    <span className='form__label'>Выберите доступные форматы</span>
+                    <span className='form__label'>Выберите один или два из доступных форматов</span>
                 </div>
 
                 <div className="form__formats">
                     <div className="form__format">
-                        <input type="checkbox" checked={checkboxFormat.pdf} id="pdf" value=".pdf" name="format_pdf" onChange={chengePost} />
+                        <input type="checkbox" checked={checkboxFormat.pdf} id="pdf" value=".pdf" name="pdf" onChange={chengePost} />
                         <label className="form__label-checkbox" htmlFor="format_pdf">.pdf</label>
                     </div>
 
@@ -91,11 +91,7 @@ return (
                         <input type="checkbox" checked={checkboxFormat.sig} id="sig" value=".sig" name="sig" onChange={chengePost} />
                         <label className="form__label-checkbox" htmlFor="format_sig">.sig</label>
                     </div>
-
-                    <div className="form__format">
-                        <input type="checkbox" checked={checkboxFormat.txt} id="name" value=".txt" name="txt" onChange={chengePost} />
-                        <label className="form__label-checkbox" htmlFor="format_txt">.txt</label>
-                    </div>
+                    <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorFormat}>{errorText.errorFormat}</ErrorForm>
                 </div>
             </div>
             

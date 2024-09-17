@@ -20,18 +20,19 @@ export const useAddPost = (): useAddPostType => {
         errorName: false,
         errorNumber: false,
         errorStatus: false,
+        errorFormat: false,
   });
   
   const [errorText, setErrorText] = useState<ErrorTextPostType>({
         errorName: '',
         errorNumber: '',
         errorStatus: '',
+        errorFormat: '',
   });
     
     const [checkboxFormat, setCheckboxFormat] = useState<CheckboxFormatType>({
         pdf: true,
         sig: false,
-        txt: false,
     });
 
   const chengePost = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -50,17 +51,10 @@ export const useAddPost = (): useAddPostType => {
                 newDocument.documentStatus = formElem.value;
                 break;
             case 'pdf':
-                console.log(formElem.checked);
                 newCheckboxFormat.pdf = formElem.checked;
-                if (newCheckboxFormat.pdf) {
-                    
-                }
                 break;
             case 'sig':
                 newCheckboxFormat.sig = formElem.checked;
-                break;
-            case 'txt':
-                newCheckboxFormat.txt = formElem.checked;
                 break;
             default:
                 break;
@@ -70,7 +64,7 @@ export const useAddPost = (): useAddPostType => {
         setNewDocument(newNewDocument);
   }
 
-      const validation = (e: FormEvent<HTMLInputElement>): boolean => {
+  const validation = (e: FormEvent<HTMLInputElement>): boolean => {
         const form = e.target as HTMLFormElement;
         const newErrorText: ErrorTextPostType = { ...errorText };
         const newErrorStatus: ErrorStatusPostType = { ...errorStatusDoc };
@@ -116,6 +110,12 @@ export const useAddPost = (): useAddPostType => {
                         if (newErrorStatus.errorStatus) {
                             newErrorStatus.errorStatus = false;
                         }
+                    }
+                case 'pdf' || 'sig': 
+                    console.log(checkboxFormat.pdf && checkboxFormat.sig);
+                    if (checkboxFormat.pdf && checkboxFormat.sig) {
+                        newErrorText.errorFormat = 'Выберите один или оба из предложенных форматов';
+                        newErrorStatus.errorFormat = true;
                     }
                 default:
                     break;

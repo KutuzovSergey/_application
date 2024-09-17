@@ -59,19 +59,20 @@ export type UseRegistrAccountType = [
 export type ErrorStatusPostType = {
    errorName: boolean,
    errorNumber: boolean,
-   errorStatus: boolean
+   errorStatus: boolean,
+   errorFormat: boolean,
 }
 
 export type ErrorTextPostType = {
    errorName: string,
    errorNumber: string,
-   errorStatus: string
+   errorStatus: string,
+   errorFormat: string,
 }
 
 export type CheckboxFormatType = {
    pdf: boolean,
    sig: boolean,
-   txt: boolean,
 }
 
 export type useAddPostType = [

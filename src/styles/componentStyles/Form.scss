@@ -43,6 +43,7 @@
 
         &__formats{
             @include blockContent(100%, auto, 20px 0 0 0, flex, center, space-around);
+            position: relative;
         }
 
         &__label-checkbox{

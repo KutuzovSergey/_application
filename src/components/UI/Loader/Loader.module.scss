@@ -1,9 +1,20 @@
 @import '../../../styles/Main.scss';
 
 .loader{
-    @include blockContent(100%, 100vh, 0px, flex, center, space-around);
+    width: 100%;
+    height: 100vh;
     flex-direction: column;
     background-color: $corporate_color;
+    overflow: hidden;
+
+    &__wrapper{
+        @include blockContent(1200px, 100vh, auto, flex, center, space-around);
+        flex-direction: column;
+        overflow: hidden;
+        @media (max-width: 1300px) {
+            width: 95%;
+        }
+    }
 
     &__block{
         display: flex;
@@ -18,44 +29,29 @@
     &__block_button{
         display: flex;
         width: 100%;
-        padding: 30px;
+        padding: 20px;
         align-items: center;
         justify-content: end;
     }
 
+    &__block_button_second{
+        display: flex;
+        width: 100%;
+        padding: 20px;
+        align-items: center;
+        justify-content:left;
+    }
+
     &__item_button{
-        width: 12%;
-        height: 35px;
+        width: 130px;
+        height: 55px;
         border-radius: 4px;
         background-color: #1976d2;
         box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     }
 
-    
-
-    &__block_search{
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    &__item_search{
-        @include blockContent(80%, 50px, 0px, flex, center, center);
-        border-radius: 4px;
-        background-color: #1976d2;
-    }
-
-    &__search{
-        width: 80%;
-        height: 40px;
-        border-radius: 4px;
-        background-color: $corporate_color;
-    }
-
     &__block_table{
-        width: 90%;
+        width: 100%;
         height: auto;
         margin: auto 0;
         padding-bottom: 30px;
@@ -64,8 +60,8 @@
 
     &__item{
         width: 80%;
-        height: 50px;
-        margin: 30px auto 0 auto;
+        height: 150px;
+        margin: 60px auto 0 auto;
         border-radius: 4px;
         background-color: #1976d2;
     }
@@ -73,7 +69,7 @@
     &__animation {
         width: 48px;
         height: 48px;
-        top: 20%;
+        top: 10%;
         position: absolute;
     }
 
