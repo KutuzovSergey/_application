@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import MyInput from '../components/UI/MyInput/MyInput.tsx';
 import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
@@ -6,6 +6,9 @@ import { useLoginAccount } from '../hooks/useLoginAccount.ts';
 // import { UseLoginAccountType } from '../type/typesHooks.ts';
 import { useDispatch } from 'react-redux';
 import { addUser, changeIsAuth } from '../action/actionCreators.ts';
+import { dataPreparation } from '../utils/createUserNumber.ts';
+import { authorizationsUser } from '../AP/allRequests.ts';
+import { useLegalization } from '../hooks/useLegalization.ts';
 
 import '../styles/componentStyles/Form.scss';
 
@@ -15,19 +18,20 @@ type Props = {
 }
 
 const LoginForm: FC = (props: Props) => {
+    const [userToken, setUserToken] = useState<string>('');
     const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useLoginAccount();
-
-    const dispatch = useDispatch();
+    const [userLegalization] = useLegalization(userToken, userData, props.setActive, clearForm);
 
     const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
         e.preventDefault();
 
         if (validation(e)) {
-            dispatch(addUser(userData));
-            dispatch(changeIsAuth(true));
-            localStorage.userToken = '';
-        props.setActive(false);
-        clearForm();
+            const user: string = dataPreparation(userData, 13);
+            authorizationsUser(user).then(function (respons) {
+                setUserToken(respons.data.data.token);
+            }).catch(function (error) {
+                console.log(error);
+            })
     }
 }
 
@@ -36,6 +40,10 @@ useEffect(() => {
         clearForm();
     }
 }, [props.active]);
+    
+    useEffect(() => {
+        userLegalization();
+    }, [userToken]);
 
 return (
     <div className="form">

@@ -2,12 +2,12 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import {
     ErrorStatusRegistrType,
     UseRegistrAccountType,
-    UserDataRegistrType,
+    UserDataType,
     ErrorTextRegistrType
 } from "../type/typesHooks";
 
 export const useRegistrAccount = (): UseRegistrAccountType =>{
-    const [userData, setUserData] = useState<UserDataRegistrType>({
+    const [userData, setUserData] = useState<UserDataType>({
         username: '',
         password: '',
         repeatPassword: '',
@@ -26,7 +26,7 @@ export const useRegistrAccount = (): UseRegistrAccountType =>{
     });
 
     const changeInput = (e: ChangeEvent): void => {
-        const newUserData: UserDataRegistrType = { ...userData };
+        const newUserData: UserDataType = { ...userData };
         const formElem = e.target as HTMLInputElement;
         
         switch (formElem.name) {

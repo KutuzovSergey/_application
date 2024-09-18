@@ -5,6 +5,7 @@ import { TableCellType } from './typesMain';
 export type UserDataType = {
    username: string,
    password: string,
+   repeatPassword?: string
 }
 
 export type ErrorStatusType = {
@@ -27,11 +28,6 @@ export type UseLoginAccountType = [
 ]
 
 // Регистрация
-export type UserDataRegistrType = {
-   username: string,
-   password: string,
-   repeatPassword: string
-}
 
 export type ErrorStatusRegistrType = {
    errorName: boolean,
@@ -46,7 +42,7 @@ export type ErrorTextRegistrType = {
 }
 
 export type UseRegistrAccountType = [
-   userData: UserDataRegistrType,
+   userData: UserDataType,
    errorText: ErrorTextRegistrType,
    errorStatus: ErrorStatusRegistrType,
    changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
@@ -75,7 +71,7 @@ export type CheckboxFormatType = {
    sig: boolean,
 }
 
-export type useAddPostType = [
+export type UseAddPostType = [
    newDocument: TableCellType,
     errorStatus: ErrorStatusPostType,
    errorText: ErrorTextPostType,
@@ -86,4 +82,11 @@ export type useAddPostType = [
    clearForm: () => void,
    addPost: () => void,
    selectFormat: (e: ChangeEvent<HTMLInputElement>) => void
+]
+
+export type UseLegalizationType = [
+   userLegalization: (userToken: string,
+      userData: UserDataType,
+      setActive: (bool: boolean) => void,
+      clearForm: () => void ) => void
 ]

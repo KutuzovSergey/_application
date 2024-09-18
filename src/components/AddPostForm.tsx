@@ -91,7 +91,7 @@ return (
                         <input type="checkbox" checked={checkboxFormat.sig} id="sig" value=".sig" name="sig" onChange={chengePost} />
                         <label className="form__label-checkbox" htmlFor="format_sig">.sig</label>
                     </div>
-                    <ErrorForm bottom='-20px' left='0px' active={!errorStatus.errorFormat}>{errorText.errorFormat}</ErrorForm>
+                    <ErrorForm bottom='-20px' left='15%' active={!errorStatus.errorFormat}>{errorText.errorFormat}</ErrorForm>
                 </div>
             </div>
             

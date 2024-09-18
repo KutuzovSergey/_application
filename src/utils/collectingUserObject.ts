@@ -1,7 +1,7 @@
-import { UserDataRegistrType } from "../type/typesHooks"
+import { UserDataType } from "../type/typesHooks"
 import { StateUserType } from "../type/typesStore";
 
-export const collectingUserObject = (userData: UserDataRegistrType, userToken: string, isAuth: boolean): StateUserType => {
+export const collectingUserObject = (userData: UserDataType, userToken: string, isAuth: boolean): StateUserType => {
     const nawUserData: any = { ...userData }
     delete nawUserData.repeatPassword
     const result: StateUserType = {
@@ -9,6 +9,7 @@ export const collectingUserObject = (userData: UserDataRegistrType, userToken: s
         isAuth: isAuth,
         token: userToken,
     }
+    console.log(result);
     
     return result
 } 

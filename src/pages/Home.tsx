@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import { changeIsAuth, addUser } from '../action/actionCreators.ts';
+import { installUser } from '../action/actionCreators.ts';
 import { getTableData } from '../AP/allRequests.ts';
 import Loader from '../components/UI/Loader/Loader.tsx';
 import { StateUserType } from '../type/typesStore.ts';
@@ -14,7 +14,7 @@ import AddPostForm from '../components/AddPostForm.tsx';
 import '../styles/Home.scss';
 
 const Home: FC = () => {
-    const userName: string = useSelector((state: StateUserType) => state.userData.username);
+    const userName: string = useSelector((state: StateUserType) => state.userData.userData);
     const userToken: string = localStorage.getItem('userToken');
     const [isLoader, setLoader] = useState<boolean>(true);
     const [tableCells, serTableCells] = useState<TableCellsType>();
@@ -23,8 +23,14 @@ const Home: FC = () => {
     const dispatch = useDispatch();
 
     const exitApp = (): void => {
-        dispatch(changeIsAuth(false));
-        dispatch(addUser({username: '',  password: ''}));
+        dispatch(installUser({
+            userData: {
+                username: '',
+                password: '',
+            },
+            isAuth: false,
+            token: ''
+        }));
         localStorage.userToken = '';
     }
 
@@ -60,7 +66,7 @@ const Home: FC = () => {
                     </div>
                     
                     <div className="entry-form__user-name">
-                        <span>{userName}</span>
+                        {/* <span>{userName}</span> */}
                     </div>
                     <div className="entry-form__add-post">
                         <Button variant="contained" size="large" onClick={openWindow}>Добавить</Button>

@@ -32,7 +32,7 @@ const Unregistered: FC = () => {
             <MyModal
                 active={modalLogin}
                 setActive={setModalLogin}>
-                <LoginForm active={setModalLogin}/>
+                <LoginForm active={modalLogin} setActive={setModalLogin} />
             </MyModal>
             <MyModal
                 active={modalRegistr}

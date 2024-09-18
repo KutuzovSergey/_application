@@ -45,6 +45,7 @@ const RegistrForm: FC = (props: Props) => {
 
     useEffect(() => {
         if (userToken !== '' && typeof userToken === 'string') {
+            console.log(userData);
             dispatch(installUser(collectingUserObject(userData, userToken, true)));
             props.setActive(false);
             clearForm();
