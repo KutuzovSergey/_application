@@ -3,6 +3,7 @@ import MyInput from './UI/MyInput/MyInput.tsx';
 import ErrorForm from './UI/ErrorForm/ErrorForm.tsx';
 import MyButton from './UI/MyButton/MyButton.tsx';
 import { useAddPost } from '../hooks/useAddPost.ts';
+import { createData } from '../AP/allRequests.ts';
 
 import '../styles/componentStyles/Form.scss';
 
@@ -19,8 +20,9 @@ const AddPostForm: FC = (props: Props) => {
         e.preventDefault();
 
         if (validation(e)) {
-            addPost();
+            addPost(createData);
             clearForm();
+            props.setActive(false);
     }
 }
 

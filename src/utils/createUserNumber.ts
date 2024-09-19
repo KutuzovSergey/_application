@@ -5,11 +5,8 @@ export const dataPreparation = (data: UserDataType, numberUser: number): string 
     nawData.username = `${data.username}${numberUser}`;
 
     if ('repeatPassword' in nawData) {
-        console.log(nawData);
         delete nawData.repeatPassword;
     }
-
-    console.log(nawData);
 
     return JSON.stringify(nawData)
 } 

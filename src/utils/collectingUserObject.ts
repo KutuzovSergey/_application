@@ -1,15 +1,14 @@
 import { UserDataType } from "../type/typesHooks"
-import { StateUserType } from "../type/typesStore";
+import { UserDataReducerType } from "../type/typesStore";
 
-export const collectingUserObject = (userData: UserDataType, userToken: string, isAuth: boolean): StateUserType => {
+export const collectingUserObject = (userData: UserDataType, userToken: string, isAuth: boolean): UserDataReducerType => {
     const nawUserData: any = { ...userData }
     delete nawUserData.repeatPassword
-    const result: StateUserType = {
+    const result: UserDataReducerType = {
         userData: nawUserData,
         isAuth: isAuth,
         token: userToken,
     }
-    console.log(result);
     
     return result
 } 

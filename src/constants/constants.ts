@@ -1,4 +1,9 @@
-import { UserConstType, changeIsAuthConstType, InstallTokenConstType, InstallUserConstType } from "../type/typesStore.ts";
+import {
+    UserConstType,
+    changeIsAuthConstType,
+    InstallTokenConstType,
+    InstallUserConstType, DocumentsConstType
+} from "../type/typesStore.ts";
 
 export const userConst: UserConstType = {
     ADD_USER_DATA: 'ADD_USER_DATA',
@@ -15,4 +20,10 @@ export const InstallTokenConst: InstallTokenConstType = {
 
 export const InstallUserConst: InstallUserConstType = {
     INSTALL_USER: 'INSTALL_USER',
+}
+
+export const documentsConst: DocumentsConstType = {
+    ADD_DOCUMENT: 'ADD_DOCUMENT',
+    DELETE_DOCUMENT: 'DELETE_DOCUMENT',
+    SET_LIST_DOCUMENT: 'SET_LIST_DOCUMENT',
 }

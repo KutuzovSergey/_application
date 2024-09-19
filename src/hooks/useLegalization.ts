@@ -8,7 +8,6 @@ export const useLegalization = (userToken: string, userData: UserDataType, setAc
 
     const userLegalization = (): void => {
         if (userToken !== '' && typeof userToken === 'string') {
-            console.log(userData);
             dispatch(installUser(collectingUserObject(userData, userToken, true)));
             setActive(false);
             clearForm();

@@ -1,14 +1,11 @@
 import { FC, FormEvent, useEffect, useState } from 'react';
+import { useRegistrAccount } from '../hooks/useRegistrAccount.ts';
+import { authorizationsUser } from '../AP/allRequests.ts';
+import { dataPreparation } from '../utils/createUserNumber.ts';
+import { useLegalization } from '../hooks/useLegalization.ts';
 import MyInput from '../components/UI/MyInput/MyInput.tsx';
 import ErrorForm from '../components/UI/ErrorForm/ErrorForm.tsx';
 import MyButton from '../components/UI/MyButton/MyButton.tsx';
-import { useRegistrAccount } from '../hooks/useRegistrAccount.ts';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUser, changeIsAuth, installToken, installUser } from '../action/actionCreators.ts';
-import { getTableData, authorizationsUser } from '../AP/allRequests.ts';
-import { dataPreparation } from '../utils/createUserNumber.ts';
-import { StateUserType } from '../type/typesStore.ts';
-import { collectingUserObject } from '../utils/collectingUserObject.ts';
 
 import '../styles/componentStyles/Form.scss';
 
@@ -19,9 +16,8 @@ type Props = {
 
 const RegistrForm: FC = (props: Props) => {
     const [userData, errorText, errorStatus, changeInput, validation, clearForm] = useRegistrAccount();
-    const token = useSelector((state: StateUserType) => state.userData);
-    const dispatch = useDispatch();
     const [userToken, setUserToken] = useState<string>('');
+    const [userLegalization] = useLegalization(userToken, userData, props.setActive, clearForm);
 
     const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
         e.preventDefault();
@@ -44,14 +40,7 @@ const RegistrForm: FC = (props: Props) => {
     }, [props.active]);
 
     useEffect(() => {
-        if (userToken !== '' && typeof userToken === 'string') {
-            console.log(userData);
-            dispatch(installUser(collectingUserObject(userData, userToken, true)));
-            props.setActive(false);
-            clearForm();
-            localStorage.userToken = userToken;
-            localStorage.isAuth = true;
-        }
+        userLegalization();
     }, [userToken]);
 
     return (

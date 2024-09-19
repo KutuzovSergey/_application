@@ -7,8 +7,18 @@ import {
 } from "../type/typesHooks.ts";
 import { TableCellType } from "../type/typesMain.ts";
 import { generateRandomNum } from "../utils/generateRandomNum.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { StateUserType } from "../type/typesStore.ts";
+import { workingWithTableData } from "../AP/allRequests.ts";
+import { addDocument } from "../action/actionCreators.ts";
 
 export const useAddPost = (): UseAddPostType => {
+  const userName: string = useSelector((state: StateUserType) => state.userData.userData.username);
+  const userToken: string = useSelector((state: StateUserType) => state.userData.token);
+  const dispatch = useDispatch();
+  // const state = useSelector((state: any) => state);
+  // console.log(state);
+
   const [newDocument, setNewDocument] = useState<TableCellType>({
     companySigDate: "",
     companySignatureName: "",
@@ -45,11 +55,7 @@ export const useAddPost = (): UseAddPostType => {
       const newDocumentName: string = newNewDocument.documentName;
       const todaysDate = new Date().toISOString();
 
-    newNewDocument.id = `${generateRandomNum(99999999, 9999999)}-
-            ${generateRandomNum(9999, 999)}-
-            ${generateRandomNum(9999, 999)}-
-            ${generateRandomNum(9999, 999)}-
-            ${generateRandomNum(999999999999, 99999999999)}`;
+    newNewDocument.id = `${generateRandomNum(99999999, 9999999)}-${generateRandomNum(9999, 999)}-${generateRandomNum(9999, 999)}-${generateRandomNum(9999, 999)}-${generateRandomNum(999999999999, 99999999999)}`;
       
     if (checkboxFormat.pdf && checkboxFormat.sig) {
         newNewDocument.documentName = `${newDocumentName}.pdf`;
@@ -146,7 +152,6 @@ export const useAddPost = (): UseAddPostType => {
             }
           }
         case "pdf" || "sig":
-          console.log(checkboxFormat.pdf || checkboxFormat.sig);
           if (!(checkboxFormat.pdf || checkboxFormat.sig)) {
             newErrorText.errorFormat =
               "Выберите один или оба из предложенных форматов";
@@ -196,8 +201,13 @@ export const useAddPost = (): UseAddPostType => {
     });
   };
 
-  const addPost = () => {
-    console.log(prepareShipment());
+  const addPost = (url: string) => {
+    workingWithTableData(userToken, url, prepareShipment(userName)).then(function (respons) {
+      dispatch(addDocument([respons.data.data]));
+      console.log(respons.data.data);
+    }).catch(function (error) {
+      console.log(error);
+    });
   };
 
   return [

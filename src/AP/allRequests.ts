@@ -40,8 +40,9 @@ export async function getTableData(userToken: string): Promise<any> {
     return axios.get(url, config)
 }
 
-export async function workingWithTableData(userToken: string, idData: string, actionUrl: string, data: TableCellType): Promise<any> {
-     const url: string = 'https://test.v5.pryaniky.com/ru/data/v3/testmethods/docs/userdocs/set/';
+export async function workingWithTableData(userToken: string, actionUrl: string, data: TableCellType, idData = ''): Promise<any> {
+    console.log(userToken);
+     const url: string = 'https://test.v5.pryaniky.com';
     const config = {
         headers: {
             'x-auth': userToken,
