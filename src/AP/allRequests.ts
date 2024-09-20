@@ -40,6 +40,22 @@ export async function getTableData(userToken: string): Promise<any> {
     return axios.get(url, config)
 }
 
+
+export async function deleteCellData(userToken: string, actionUrl: string, idData: string): Promise<any> {
+    const url: string = 'https://test.v5.pryaniky.com';
+    const config = {
+        headers: {
+            'x-auth': userToken,
+        }
+    };
+    console.log(userToken);
+    console.log(`${url}`);
+    console.log(`${idData}`);
+    console.log(`${actionUrl}`);
+
+    return axios.post(`${url}${actionUrl}${idData}`, config)
+}
+
 export async function workingWithTableData(userToken: string, actionUrl: string, data: TableCellType, idData = ''): Promise<any> {
     console.log(userToken);
      const url: string = 'https://test.v5.pryaniky.com';

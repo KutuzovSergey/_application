@@ -9,6 +9,7 @@ import TableCell from "../components/TableCell.tsx";
 import { TableCellsType } from "../type/typesMain.ts";
 import MyModal from "../components/UI/MyModal/MyModal.tsx";
 import AddPostForm from "../components/AddPostForm.tsx";
+import MyModalText from "../components/UI/MyModalText/MyModalText.tsx";
 
 import "../styles/Home.scss";
 
@@ -19,8 +20,12 @@ const Home: FC = () => {
   const tableCells: TableCellsType = useSelector(
     (state: StateUserType) => state.documents
   );
-  
+  console.log(tableCells);
+
   const userToken: string = localStorage.getItem("userToken");
+  
+  const [modalInfoHomeText, setModalInfoHomeText] = useState<string>('');
+  const [modalHomeInfo, setModalHomeInfo] = useState<boolean>(false);
   const [isLoader, setLoader] = useState<boolean>(true);
   const [modalAddPost, setModalAddPost] = useState<boolean>(false);
 
@@ -86,8 +91,19 @@ const Home: FC = () => {
           </div>
         </div>
       )}
+
       <MyModal active={modalAddPost} setActive={setModalAddPost}>
-        <AddPostForm active={modalAddPost} setActive={setModalAddPost} />
+        <AddPostForm
+          active={modalAddPost}
+          setActive={setModalAddPost}
+          setModalHomeInfo={setModalHomeInfo}
+          setModalInfoHomeText={setModalInfoHomeText} />
+      </MyModal>
+
+      <MyModal
+        active={modalHomeInfo}
+        setActive={setModalHomeInfo}>
+        <MyModalText>{modalInfoHomeText}</MyModalText>
       </MyModal>
     </div>
   );

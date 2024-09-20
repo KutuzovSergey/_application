@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeIsAuth } from './action/actionCreators.ts';
+import { addUserName, changeIsAuth } from './action/actionCreators.ts';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter.tsx';
 
@@ -9,14 +9,16 @@ import './styles/App.scss';
 function App() {
   const dispatch = useDispatch();
   const setUserStatus = () => {
-    if (localStorage.getItem('userToken') !== null) {
-      if(localStorage.getItem('userToken') === ''){
+    if (localStorage.getItem('userToken') !== null && localStorage.getItem('userName') !== null) {
+      if (localStorage.getItem('userToken') === '' && localStorage.getItem('userName') === '') {
         dispatch(changeIsAuth(false));
+        dispatch(addUserName(localStorage.getItem('userName')))
        } else {
         dispatch(changeIsAuth(true));
        }
     } else {
       localStorage.setItem('userToken', '');
+      localStorage.setItem('userName', '');
       dispatch(changeIsAuth(false));
     }
   }

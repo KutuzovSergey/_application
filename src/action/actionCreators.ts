@@ -1,42 +1,30 @@
-import { changeIsAuthConst, userConst, InstallTokenConst, InstallUserConst, documentsConst } from "../constants/constants.ts";
+import { userConst, documentsConst } from "../constants/constants.ts";
 import { UserDataType } from "../type/typesHooks.ts";
-import { UserDataReducerType, UserActionType, DocumentsReducerType, DocumentActionType } from "../type/typesStore.ts";
+import { UserActionType, DocumentsReducerType, DocumentActionType } from "../type/typesStore.ts";
 
 // авторизация пользователя
 export const changeIsAuth = (isAuth: boolean): UserActionType => {
     return {
-        type: changeIsAuthConst.CHANGE_IS_AUTH,
+        type: userConst.CHANGE_IS_AUTH,
         userData: isAuth
     }
 }
 
-// export const addUser = (userData: UserDataType): UserActionType => {
-//     return {
-//         type: userConst.ADD_USER_DATA,
-//         userData: userData
-//     }
-// }
-
-export const deleteUser = (userData: UserDataType): UserActionType => {
+export const addUserName = (userData: UserDataType): UserActionType => {
     return {
-        type: userConst.DELETE_USER,
+        type: userConst.ADD_USER_NAME_DATA,
         userData: userData
     }
 }
 
-export const installToken = (userData: string): UserActionType => {
+export const installUser = (userData: UserActionType): UserActionType => {
     return {
-        type: InstallTokenConst.INSTALL_TOKEN,
+        type: userConst.INSTALL_USER,
         userData: userData
     }
 }
 
-export const installUser = (userData: UserDataReducerType): UserActionType => {
-    return {
-        type: InstallUserConst.INSTALL_USER,
-        userData: userData
-    }
-}
+// 
 
 export const addDocument = (listDocument: DocumentsReducerType): DocumentActionType => {
     return {

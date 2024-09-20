@@ -1,25 +1,9 @@
-import {
-    UserConstType,
-    changeIsAuthConstType,
-    InstallTokenConstType,
-    InstallUserConstType, DocumentsConstType
-} from "../type/typesStore.ts";
+import { UserConstType, DocumentsConstType } from "../type/typesStore.ts";
 
 export const userConst: UserConstType = {
-    ADD_USER_DATA: 'ADD_USER_DATA',
-    DELETE_USER: 'DELETE_USER',
-}
-
-export const changeIsAuthConst: changeIsAuthConstType = {
-    CHANGE_IS_AUTH: 'CHANGE_IS_AUTH',
-}
-
-export const InstallTokenConst: InstallTokenConstType = {
-    INSTALL_TOKEN: 'INSTALL_TOKEN',
-}
-
-export const InstallUserConst: InstallUserConstType = {
     INSTALL_USER: 'INSTALL_USER',
+    CHANGE_IS_AUTH: 'CHANGE_IS_AUTH',
+    ADD_USER_NAME_DATA: 'ADD_USER_NAME_DATA',
 }
 
 export const documentsConst: DocumentsConstType = {

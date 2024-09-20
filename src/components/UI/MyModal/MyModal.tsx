@@ -1,18 +1,18 @@
-import React from "react";
+import { ReactNode, FC } from "react";
 import MyButtonSmall from "../MyButtonSmall/MyButtonSmall.tsx";
 
 import cl from "./MyModal.module.scss";
 
 
 type Props = {
-    children: React.ReactNode | string,
+    children: ReactNode | string,
     active: boolean,
     setActive: (bool: boolean) => void,
     activityIndicator?: boolean,
     className?: string
 }
 
-const MyModal:React.FC<Props> = ({children, ...props}: Props) =>{
+const MyModal: FC<Props> = ({children, ...props}: Props) =>{
     const modalClass: string[] = [cl.myModal];
     const modalClassBlock: string[] = [cl.myModal__block, cl.myModal__block_scroll];
     const disableClass: string[] = [cl.myModal__disable];

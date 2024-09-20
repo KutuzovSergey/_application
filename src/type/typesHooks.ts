@@ -73,9 +73,11 @@ export type CheckboxFormatType = {
 
 export type UseAddPostType = [
    newDocument: TableCellType,
-    errorStatus: ErrorStatusPostType,
+   errorStatus: ErrorStatusPostType,
    errorText: ErrorTextPostType,
    checkboxFormat: CheckboxFormatType,
+   errorMessage: string,
+   errorMessageStatus: boolean,
    changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
    validation: (e: FormEvent<HTMLInputElement>) => boolean,
    chengePost: (e: ChangeEvent<HTMLInputElement>) => void,
@@ -89,4 +91,10 @@ export type UseLegalizationType = [
       userData: UserDataType,
       setActive: (bool: boolean) => void,
       clearForm: () => void ) => void
+]
+
+export type UseDeleteCellType = [
+   errorText: string,
+   errorStatus: boolean,
+   deleteCell: () => void
 ]

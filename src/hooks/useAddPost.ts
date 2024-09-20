@@ -16,8 +16,9 @@ export const useAddPost = (): UseAddPostType => {
   const userName: string = useSelector((state: StateUserType) => state.userData.userData.username);
   const userToken: string = useSelector((state: StateUserType) => state.userData.token);
   const dispatch = useDispatch();
-  // const state = useSelector((state: any) => state);
-  // console.log(state);
+
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessageStatus, setErrorMessageStatus] = useState<boolean>(false);
 
   const [newDocument, setNewDocument] = useState<TableCellType>({
     companySigDate: "",
@@ -28,7 +29,7 @@ export const useAddPost = (): UseAddPostType => {
     employeeNumber: "",
     employeeSigDate: "",
     employeeSignatureName: "",
-    id: "6efd0901-6110-4438-871c-9cdb70a634d3",
+    id: '',
   });
 
   const [errorStatusDoc, setErrorStatusDoc] = useState<ErrorStatusPostType>({
@@ -203,8 +204,12 @@ export const useAddPost = (): UseAddPostType => {
 
   const addPost = (url: string) => {
     workingWithTableData(userToken, url, prepareShipment(userName)).then(function (respons) {
-      dispatch(addDocument([respons.data.data]));
-      console.log(respons.data.data);
+      if (respons.data.data) {
+        dispatch(addDocument([respons.data.data]));
+      } else {
+        setErrorMessage(respons.data.error_text);
+        setErrorMessageStatus(true);
+      }
     }).catch(function (error) {
       console.log(error);
     });
@@ -215,6 +220,8 @@ export const useAddPost = (): UseAddPostType => {
     errorStatusDoc,
     errorText,
     checkboxFormat,
+    errorMessage,
+    errorMessageStatus,
     validation,
     chengePost,
     clearForm,

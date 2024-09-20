@@ -12,6 +12,7 @@ export const useLegalization = (userToken: string, userData: UserDataType, setAc
             setActive(false);
             clearForm();
             localStorage.userToken = userToken;
+            localStorage.userName = userData.username;
             localStorage.isAuth = true;
         }
     }

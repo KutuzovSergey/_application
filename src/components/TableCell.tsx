@@ -1,23 +1,38 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import { IconButton } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import { OptionsSelectType, TableCellType } from "../type/typesMain.ts";
 import MySelect from "../components/UI/MySelect/MySelect.tsx";
 import MyModal from "./UI/MyModal/MyModal.tsx";
+import { useDeleteCell } from "../hooks/useDeleteCell.ts";
 
 import '../styles/componentStyles/TableCell.scss';
+import MyModalText from "./UI/MyModalText/MyModalText.tsx";
 
 type Props = {
     cell: TableCellType
 }
 
 const TableCell: FC = (props: Props) => {
+    const [errorText, errorStatus, deleteCell] = useDeleteCell(props.cell.id);
     const [modalInfo, setModalInfo] = useState<boolean>(false);
+    const [modalInfoText, setModalInfoText] = useState<string>('');
 
     const openModalInfo = () => {
         setModalInfo(true);
+        setModalInfoText('Эта функция пока не доступна');
     }
+
+    useEffect(() => { 
+        if (errorStatus) {
+            setModalInfo(errorStatus);
+            setModalInfoText(errorText);
+        } else {
+            setModalInfo(false);
+            setModalInfoText('');
+        }
+    }, [errorStatus]);
 
     const optionFotmats: OptionsSelectType[] = [
         {
@@ -65,7 +80,7 @@ const TableCell: FC = (props: Props) => {
                 </div>
                 <div className="table-cell__button">
                     <div className="table-cell__delete">
-                        <IconButton aria-label="fingerprint" color="secondary">
+                        <IconButton aria-label="fingerprint" color="secondary" onClick={() => deleteCell(props.cell.id)}>
                             <ClearIcon />
                         </IconButton>
                     </div>
@@ -80,10 +95,8 @@ const TableCell: FC = (props: Props) => {
             <MyModal
                 active={modalInfo}
                 setActive={setModalInfo}>
-                <div className="table-cell__window-info">
-                        <span>Эта функция пока не доступна</span>
-                    </div>
-                </MyModal>
+                <MyModalText>{modalInfoText}</MyModalText>
+            </MyModal>
         </div>
     )
 }

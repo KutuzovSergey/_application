@@ -9,12 +9,23 @@ import '../styles/componentStyles/Form.scss';
 
 type Props = {
     active: boolean,
-    setActive: (active: boolean) => void
+    setActive: (active: boolean) => void,
+    setModalHomeInfo: (active: boolean) => void,
+    setModalInfoHomeText: (text: string) => void
 }
 
 const AddPostForm: FC = (props: Props) => {
 
-    const [newDocument, errorStatus, errorText, checkboxFormat, validation, chengePost, clearForm, addPost] = useAddPost();
+    const [newDocument,
+        errorStatus,
+        errorText,
+        checkboxFormat,
+        errorMessage,
+        errorMessageStatus,
+        validation,
+        chengePost,
+        clearForm,
+        addPost] = useAddPost();
 
     const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
         e.preventDefault();
@@ -31,6 +42,13 @@ useEffect(() => {
         clearForm();
     }
 }, [props.active]);
+    
+useEffect(() => {
+    if (errorMessageStatus) {
+        props.setModalHomeInfo(true);
+        props.setModalInfoHomeText(errorMessage);
+    }
+}, [errorMessageStatus])
 
 return (
     <div className="form">
