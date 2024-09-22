@@ -9,7 +9,10 @@ import './styles/App.scss';
 function App() {
   const dispatch = useDispatch();
   const setUserStatus = () => {
-    if (localStorage.getItem('userToken') !== null && localStorage.getItem('userName') !== null) {
+    // console.log(localStorage.getItem('userToken'));
+    // console.log(localStorage.getItem('userName'));
+    // console.log(localStorage.getItem('userName') === '');
+    if (localStorage.getItem('userToken') === '' && localStorage.getItem('userName') === '') {
       if (localStorage.getItem('userToken') === '' && localStorage.getItem('userName') === '') {
         dispatch(changeIsAuth(false));
         dispatch(addUserName(localStorage.getItem('userName')))
@@ -22,7 +25,7 @@ function App() {
       dispatch(changeIsAuth(false));
     }
   }
-  // localStorage.userToken = ''
+  localStorage.userToken = ''
   useEffect(() => { setUserStatus() }, []);
 
   return (

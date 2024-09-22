@@ -1,6 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import {
-  UseAddPostType,
+  UseDocumentType,
   ErrorStatusPostType,
   ErrorTextPostType,
   CheckboxFormatType,
@@ -10,14 +10,21 @@ import { generateRandomNum } from "../utils/generateRandomNum.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { StateUserType } from "../type/typesStore.ts";
 import { workingWithTableData } from "../AP/allRequests.ts";
-import { addDocument } from "../action/actionCreators.ts";
+import { addDocument, changeDocument } from "../action/actionCreators.ts";
 
-export const useAddPost = (): UseAddPostType => {
-  const userName: string = useSelector((state: StateUserType) => state.userData.userData.username);
-  const userToken: string = useSelector((state: StateUserType) => state.userData.token);
+export const useDocument = (
+  defaultValues: TableCellType | null,
+  active: boolean
+): UseDocumentType => {
+  const userName: string = useSelector(
+    (state: StateUserType) => state.userData.userData.username
+  );
+  const userToken: string = useSelector(
+    (state: StateUserType) => state.userData.token
+  );
   const dispatch = useDispatch();
 
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorMessageStatus, setErrorMessageStatus] = useState<boolean>(false);
 
   const [newDocument, setNewDocument] = useState<TableCellType>({
@@ -29,7 +36,7 @@ export const useAddPost = (): UseAddPostType => {
     employeeNumber: "",
     employeeSigDate: "",
     employeeSignatureName: "",
-    id: '',
+    id: "",
   });
 
   const [errorStatusDoc, setErrorStatusDoc] = useState<ErrorStatusPostType>({
@@ -51,28 +58,42 @@ export const useAddPost = (): UseAddPostType => {
     sig: false,
   });
 
-  const prepareShipment = (username: string) => {
-      const newNewDocument: TableCellType = { ...newDocument };
+  const prepareShipment = (username: string): TableCellType => {
+    const newNewDocument: TableCellType = { ...newDocument };
+
+    if (defaultValues === null) {
       const newDocumentName: string = newNewDocument.documentName;
       const todaysDate = new Date().toISOString();
 
-    newNewDocument.id = `${generateRandomNum(99999999, 9999999)}-${generateRandomNum(9999, 999)}-${generateRandomNum(9999, 999)}-${generateRandomNum(9999, 999)}-${generateRandomNum(999999999999, 99999999999)}`;
-      
-    if (checkboxFormat.pdf && checkboxFormat.sig) {
+      newNewDocument.id = `${generateRandomNum(
+        99999999,
+        9999999
+      )}-${generateRandomNum(9999, 999)}-${generateRandomNum(
+        9999,
+        999
+      )}-${generateRandomNum(9999, 999)}-${generateRandomNum(
+        999999999999,
+        99999999999
+      )}`;
+
+      if (checkboxFormat.pdf && checkboxFormat.sig) {
         newNewDocument.documentName = `${newDocumentName}.pdf`;
         newNewDocument.documentType = `${newDocumentName}.sig`;
-    } else if (checkboxFormat.sig) {
+      } else if (checkboxFormat.sig) {
         newNewDocument.documentName = `${newDocumentName}.sig`;
         newNewDocument.documentType = `${newDocumentName}.sig`;
-    } else if (checkboxFormat.pdf) {
+      } else if (checkboxFormat.pdf) {
         newNewDocument.documentName = `${newDocumentName}.pdf`;
         newNewDocument.documentType = `${newDocumentName}.pdf`;
-    }
-    
+      }
+
       newNewDocument.companySigDate = todaysDate;
-      newNewDocument.employeeSignatureName = username
-    
-    return newNewDocument
+      newNewDocument.employeeSignatureName = username;
+
+      return newNewDocument;
+    } else {
+      return newNewDocument
+    }
   };
 
   const chengePost = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -203,17 +224,32 @@ export const useAddPost = (): UseAddPostType => {
   };
 
   const addPost = (url: string) => {
-    workingWithTableData(userToken, url, prepareShipment(userName)).then(function (respons) {
-      if (respons.data.data) {
-        dispatch(addDocument([respons.data.data]));
-      } else {
-        setErrorMessage(respons.data.error_text);
-        setErrorMessageStatus(true);
-      }
-    }).catch(function (error) {
-      console.log(error);
-    });
+    let idUrl: string = '';
+
+    if (defaultValues !== null) {
+      idUrl = defaultValues.id;
+    }
+    workingWithTableData(userToken, url, prepareShipment(userName), idUrl)
+      .then(function (respons) {
+        if (respons.data.data) {
+          console.log(respons.data.data);
+          console.log(defaultValues !== null);
+          defaultValues !== null ? dispatch(changeDocument([respons.data.data])) : dispatch(addDocument([respons.data.data]));
+        } else {
+          setErrorMessage(respons.data.error_text);
+          setErrorMessageStatus(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
+
+  useEffect(() => {
+    if (defaultValues !== null) {
+      setNewDocument(defaultValues);
+    }
+  }, [active]);
 
   return [
     newDocument,

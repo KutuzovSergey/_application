@@ -71,7 +71,7 @@ export type CheckboxFormatType = {
    sig: boolean,
 }
 
-export type UseAddPostType = [
+export type UseDocumentType = [
    newDocument: TableCellType,
    errorStatus: ErrorStatusPostType,
    errorText: ErrorTextPostType,

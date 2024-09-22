@@ -8,6 +8,7 @@ export const userConst: UserConstType = {
 
 export const documentsConst: DocumentsConstType = {
     ADD_DOCUMENT: 'ADD_DOCUMENT',
+    CHANGE_DOCUMENT: 'CHANGE_DOCUMENT',
     DELETE_DOCUMENT: 'DELETE_DOCUMENT',
     SET_LIST_DOCUMENT: 'SET_LIST_DOCUMENT',
 }

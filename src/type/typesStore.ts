@@ -19,6 +19,7 @@ export type UserActionType = {
 
 export type DocumentsConstType = {
    ADD_DOCUMENT: string,
+   CHANGE_DOCUMENT: string,
    DELETE_DOCUMENT: string,
    SET_LIST_DOCUMENT: string,
 }

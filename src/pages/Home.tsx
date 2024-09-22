@@ -2,13 +2,13 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { installUser, setListDocument } from "../action/actionCreators.ts";
-import { getTableData } from "../AP/allRequests.ts";
+import { createData, getTableData } from "../AP/allRequests.ts";
 import Loader from "../components/UI/Loader/Loader.tsx";
 import { StateUserType } from "../type/typesStore.ts";
 import TableCell from "../components/TableCell.tsx";
 import { TableCellsType } from "../type/typesMain.ts";
 import MyModal from "../components/UI/MyModal/MyModal.tsx";
-import AddPostForm from "../components/AddPostForm.tsx";
+import PostForm from "../components/PostForm.tsx";
 import MyModalText from "../components/UI/MyModalText/MyModalText.tsx";
 
 import "../styles/Home.scss";
@@ -20,7 +20,6 @@ const Home: FC = () => {
   const tableCells: TableCellsType = useSelector(
     (state: StateUserType) => state.documents
   );
-  console.log(tableCells);
 
   const userToken: string = localStorage.getItem("userToken");
   
@@ -93,7 +92,11 @@ const Home: FC = () => {
       )}
 
       <MyModal active={modalAddPost} setActive={setModalAddPost}>
-        <AddPostForm
+        <PostForm
+          defaultValues={null}
+          urlDocument={createData}
+          titleForm='Добавить новый документ'
+          buttonText='добавить'
           active={modalAddPost}
           setActive={setModalAddPost}
           setModalHomeInfo={setModalHomeInfo}

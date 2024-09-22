@@ -46,3 +46,10 @@ export const setListDocument = (listDocument: DocumentsReducerType): DocumentAct
         listDocument: listDocument
     }
 }
+
+export const changeDocument = (listDocument: DocumentsReducerType): DocumentActionType => {
+    return {
+        type: documentsConst.CHANGE_DOCUMENT,
+        listDocument: listDocument
+    }
+}
