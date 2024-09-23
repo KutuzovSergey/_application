@@ -27,8 +27,6 @@ export const useRegistrAccount = (
     errorRepeatPassword: "",
   });
 
-  const [somethingWentWrong, setSomethingWentWrong] = useState<boolean>(false);
-
   const [errorConnection, setErrorConnection] = useState<boolean>(false);
   const [errorConnectionText, setErrorConnectionText] = useState<string>("");
 
@@ -179,13 +177,12 @@ export const useRegistrAccount = (
     });
   };
 
-  useEffect(() => {
-    if (somethingWentWrong) {
+    const showPasswordError = () => {
       const newErrorText = { ...errorText };
       const newErrorStatus = { ...errorStatus };
 
-      newErrorText.errorName = "что то не так с логином или паролем";
-      newErrorText.errorPassword = "что то не так с логином или паролем";
+      newErrorText.errorName = "неправильный логин или пароль";
+      newErrorText.errorPassword = "неправильный логин или пароль";
       newErrorText.errorRepeatPassword = "что то не так с логином или паролем";
       newErrorStatus.errorName = false;
       newErrorStatus.errorPassword = false;
@@ -193,8 +190,7 @@ export const useRegistrAccount = (
 
       setErrorText(newErrorText);
       setErrorStatus(newErrorStatus);
-    }
-  }, [somethingWentWrong]);
+  };
 
   useEffect(() => {
     if (!activeForm) {
@@ -218,6 +214,6 @@ export const useRegistrAccount = (
     returnFormState,
     setErrorConnection,
     setErrorConnectionText,
-    setSomethingWentWrong,
+    showPasswordError,
   ];
 };

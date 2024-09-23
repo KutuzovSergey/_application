@@ -1,37 +1,48 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { addUserName, changeIsAuth } from './action/actionCreators.ts';
-import { BrowserRouter } from 'react-router-dom';
-import AppRouter from './components/AppRouter.tsx';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addUserName, changeIsAuth } from "./action/actionCreators.ts";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter.tsx";
 
-import './styles/App.scss';
+import "./styles/App.scss";
 
 function App() {
   const dispatch = useDispatch();
   const setUserStatus = () => {
-    console.log(localStorage.getItem('userToken'));
-    console.log(localStorage.getItem('userName'));
+    console.log(localStorage);
+    console.log(localStorage.getItem("userToken"));
+    console.log(localStorage.getItem("userName"));
     // console.log(localStorage.getItem('userName') === '');
-    if (localStorage.getItem('userToken') === null || localStorage.getItem('userName') === null) {
-      if (localStorage.getItem('userToken') === '' || localStorage.getItem('userName') === '') {
-        dispatch(changeIsAuth(false));
-        dispatch(addUserName(localStorage.getItem('userName')))
-       } else {
-        dispatch(changeIsAuth(true));
-       }
-    } else {
-      localStorage.setItem('userToken', '');
-      localStorage.setItem('userName', '');
+    if (
+      localStorage.getItem("userToken") === null ||
+      localStorage.getItem("userName") === null
+    ) {
+      localStorage.setItem("userToken", "");
+      localStorage.setItem("userName", "");
       dispatch(changeIsAuth(false));
+    } else {
+      console.log("здесь");
+      if (
+        localStorage.getItem("userToken") === "" ||
+        localStorage.getItem("userName") === ""
+      ) {
+        dispatch(changeIsAuth(false));
+        dispatch(addUserName(localStorage.getItem("userName")));
+      } else {
+        dispatch(changeIsAuth(true));
+      }
     }
-  }
-  localStorage.userToken = ''
-  useEffect(() => { setUserStatus() }, []);
+  };
+  // localStorage.removeItem('userToken');
+  // localStorage.removeItem('userName');
+  useEffect(() => {
+    setUserStatus();
+  }, []);
 
   return (
-    <div className="App">
+    <div className="isAuth">
       <BrowserRouter>
-        <AppRouter/>
+        <AppRouter />
       </BrowserRouter>
     </div>
   );

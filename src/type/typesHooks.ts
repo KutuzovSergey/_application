@@ -30,7 +30,7 @@ export type UseLoginAccountType = [
   returnFormState: () => void,
   setErrorConnection: (error: boolean) => void,
   setErrorConnectionText: (error: string) => void,
-  setSomethingWentWrong: (status: boolean) => void
+  showPasswordError: () => void
 ];
 
 // Регистрация
@@ -59,7 +59,7 @@ export type UseRegistrAccountType = [
   returnFormState: () => void,
   setErrorConnection: (error: boolean) => void,
   setErrorConnectionText: (error: string) => void,
-  setSomethingWentWrong: (status: boolean) => void
+  showPasswordError: () => void
 ];
 
 // добавление новой записи

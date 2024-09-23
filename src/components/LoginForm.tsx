@@ -30,7 +30,7 @@ const LoginForm: FC = (props: Props) => {
     returnFormState,
     setErrorConnection,
     setErrorConnectionText,
-    setSomethingWentWrong,
+    showPasswordError,
   ] = useLoginAccount(props.active);
 
   const [userLegalization] = useLegalization(
@@ -42,7 +42,6 @@ const LoginForm: FC = (props: Props) => {
 
   const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
-    console.log(validation(e))
     if (validation(e)) {
       const user: string = dataPreparation(userData, 13);
       authorizationsUser(user)
@@ -50,15 +49,16 @@ const LoginForm: FC = (props: Props) => {
           if (respons.data.data.token) {
             setUserToken(respons.data.data.token);
           } else {
-            setSomethingWentWrong(true);
+            showPasswordError();
           }
         })
         .catch(function (error) {
+          console.log(error);
           if (error.code === "ERR_NETWORK") {
             setErrorConnection(true);
             setErrorConnectionText("Ошибка. Проверьте интернет соединение.");
           } else {
-            setSomethingWentWrong(true);
+            showPasswordError();
           }
         });
     }

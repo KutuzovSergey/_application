@@ -30,7 +30,7 @@ const RegistrForm: FC = (props: Props) => {
     returnFormState,
     setErrorConnection,
     setErrorConnectionText,
-    setSomethingWentWrong,
+    showPasswordError,
   ] = useRegistrAccount(props.active);
 
   const [userLegalization] = useLegalization(
@@ -50,7 +50,7 @@ const RegistrForm: FC = (props: Props) => {
           if (respons.data.data.token) {
             setUserToken(respons.data.data.token);
           } else {
-            setSomethingWentWrong(true);
+            showPasswordError();
           }
         })
         .catch(function (error) {
@@ -58,8 +58,7 @@ const RegistrForm: FC = (props: Props) => {
             setErrorConnection(true);
             setErrorConnectionText("Ошибка. Проверьте интернет соединение.");
           } else {
-            setSomethingWentWrong(true);
-            setErrorConnectionText(error);
+            showPasswordError();
           }
           console.log(error);
         });

@@ -22,8 +22,6 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
     errorPassword: "",
   });
 
-  const [somethingWentWrong, setSomethingWentWrong] = useState<boolean>(false);
-
   const [errorConnection, setErrorConnection] = useState<boolean>(false);
   const [errorConnectionText, setErrorConnectionText] = useState<string>("");
 
@@ -132,9 +130,7 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
     });
   };
 
-  useEffect(() => {
-      if (somethingWentWrong) {
-          console.log(somethingWentWrong);
+  const showPasswordError = () => {
       const newErrorText = { ...errorText };
       const newErrorStatus = { ...errorStatus };
 
@@ -144,19 +140,16 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
       newErrorStatus.errorPassword = false;
 
       setErrorText(newErrorText);
-          setErrorStatus(newErrorStatus);
-          console.log(errorStatus)
-    }
-  }, [somethingWentWrong]);
+      setErrorStatus(newErrorStatus);
+  };
 
   useEffect(() => {
-      if (!activeForm) {
-        
-        clearForm();
-        if (setErrorConnection) {
-            setErrorConnection(false);
-            setErrorConnectionText('');
-        }
+    if (!activeForm) {
+      clearForm();
+      if (setErrorConnection) {
+        setErrorConnection(false);
+        setErrorConnectionText("");
+      }
     }
   }, [activeForm]);
 
@@ -172,6 +165,6 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
     returnFormState,
     setErrorConnection,
     setErrorConnectionText,
-    setSomethingWentWrong,
+    showPasswordError,
   ];
 };
