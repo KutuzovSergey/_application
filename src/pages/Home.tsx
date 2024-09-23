@@ -20,6 +20,7 @@ const Home: FC = () => {
   const tableCells: TableCellsType = useSelector(
     (state: StateUserType) => state.documents
   );
+  console.log(tableCells);
 
   const userToken: string = localStorage.getItem("userToken");
   

@@ -22,6 +22,7 @@ export const useDocument = (
   const userToken: string = useSelector(
     (state: StateUserType) => state.userData.token
   );
+
   const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -92,7 +93,7 @@ export const useDocument = (
 
       return newNewDocument;
     } else {
-      return newNewDocument
+      return newNewDocument;
     }
   };
 
@@ -224,7 +225,7 @@ export const useDocument = (
   };
 
   const addPost = (url: string) => {
-    let idUrl: string = '';
+    let idUrl: string = "";
 
     if (defaultValues !== null) {
       idUrl = defaultValues.id;
@@ -232,9 +233,9 @@ export const useDocument = (
     workingWithTableData(userToken, url, prepareShipment(userName), idUrl)
       .then(function (respons) {
         if (respons.data.data) {
-          console.log(respons.data.data);
-          console.log(defaultValues !== null);
-          defaultValues !== null ? dispatch(changeDocument([respons.data.data])) : dispatch(addDocument([respons.data.data]));
+          defaultValues !== null
+            ? dispatch(changeDocument([respons.data.data]))
+            : dispatch(addDocument([respons.data.data]));
         } else {
           setErrorMessage(respons.data.error_text);
           setErrorMessageStatus(true);

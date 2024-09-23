@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addUserName, changeIsAuth } from "./action/actionCreators.ts";
+import { addUserData, addUserToken, changeIsAuth } from "./action/actionCreators.ts";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter.tsx";
+import { UserDataType } from "./type/typesHooks.ts";
 
 import "./styles/App.scss";
+
 
 function App() {
   const dispatch = useDispatch();
   const setUserStatus = () => {
-    console.log(localStorage);
-    console.log(localStorage.getItem("userToken"));
-    console.log(localStorage.getItem("userName"));
-    // console.log(localStorage.getItem('userName') === '');
     if (
       localStorage.getItem("userToken") === null ||
       localStorage.getItem("userName") === null
@@ -21,18 +19,23 @@ function App() {
       localStorage.setItem("userName", "");
       dispatch(changeIsAuth(false));
     } else {
-      console.log("здесь");
       if (
-        localStorage.getItem("userToken") === "" ||
-        localStorage.getItem("userName") === ""
+        localStorage.getItem("userToken") !== "" ||
+        localStorage.getItem("userName") !== ""
       ) {
-        dispatch(changeIsAuth(false));
-        dispatch(addUserName(localStorage.getItem("userName")));
-      } else {
+        const userData: UserDataType = {
+          username: localStorage.getItem("userName"),
+          password: ""
+        }
+        dispatch(addUserData(userData));
         dispatch(changeIsAuth(true));
+        dispatch(addUserToken(localStorage.getItem("userToken")));
+      } else {
+        dispatch(changeIsAuth(false));
       }
     }
   };
+  console.log(localStorage);
   // localStorage.removeItem('userToken');
   // localStorage.removeItem('userName');
   useEffect(() => {

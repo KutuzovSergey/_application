@@ -2,8 +2,9 @@ import { UserConstType, DocumentsConstType } from "../type/typesStore.ts";
 
 export const userConst: UserConstType = {
   INSTALL_USER: "INSTALL_USER",
+  ADD_USER_DATA: "ADD_USER_DATA",
   CHANGE_IS_AUTH: "CHANGE_IS_AUTH",
-  ADD_USER_NAME_DATA: "ADD_USER_NAME_DATA",
+  ADD_USER_TOKEN: "ADD_USER_TOKEN",
 };
 
 export const documentsConst: DocumentsConstType = {

@@ -48,12 +48,8 @@ export async function deleteCellData(userToken: string, actionUrl: string, idDat
             'x-auth': userToken,
         }
     };
-    console.log(userToken);
-    console.log(`${url}`);
-    console.log(`${idData}`);
-    console.log(`${actionUrl}`);
 
-    return axios.post(`${url}${actionUrl}${idData}`, config)
+    return axios.get(`${url}${actionUrl}${idData}`, config)
 }
 
 export async function workingWithTableData(userToken: string, actionUrl: string, data: TableCellType, idData = ''): Promise<any> {
