@@ -1,10 +1,10 @@
 @import '../../../styles/Main.scss';
 
 .window_info{
-   @include blockContent(400px, 90px, auto, flex, center, center);
+   @include blockContent(400px, 100px, auto, flex, center, center);
     background-color: rgba(0, 0, 0, 0.854);
     border-radius: 10px;
-                
+    padding: 15px;
         &>span {
             @include text($color, 1.2rem, 700, 20px, left);
         }

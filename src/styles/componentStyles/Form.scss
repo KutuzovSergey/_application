@@ -1,55 +1,64 @@
-@import './../Main.scss';
+@import "./../Main.scss";
 
 .form {
-    @include blockContent(auto, auto, auto, flex, center, space-around);
+  @include blockContent(auto, auto, auto, flex, center, space-around);
+  flex-direction: column;
+  margin: auto;
+  background-color: $background_block;
+  display: flex;
+  padding: 16px;
+  border-radius: 10px;
+
+  &__wtapper {
+    @include blockContent(500px, auto, auto, flex, center, space-around);
+    padding: 20px 30px;
     flex-direction: column;
-    margin: auto;
-    background-color: $background_block;
-    display: flex;
-    padding: 16px;
-    border-radius: 10px;
+  }
 
-        &__wtapper {
-            @include blockContent(500px, auto, auto, flex, center, space-around);
-            padding: 20px 30px;
-            flex-direction: column;
-        }
+  &__block {
+    @include blockContent(100%, auto, auto, flex, center, left);
+    width: 100%;
+    margin-top: 20px;
+    flex-direction: column;
+    position: relative;
+  }
 
-        &__block {
-            @include blockContent(100%, auto, auto, flex, center, left);
-            width: 100%;
-            margin-top: 20px;
-            flex-direction: column;
-            position: relative;
-        }
+  &__title {
+    @include blockContent(100%, auto, auto, flex, center, left);
+    @include text($color, 2rem, 700, 20px, left);
+  }
 
-        &__title {
-            @include blockContent(100%, auto, auto, flex, center, left);
-            @include text ($color, 2rem, 700, 20px, left);
-        }
+  &__label-block {
+    width: 100%;
+    margin-bottom: 5px;
+  }
 
-        &__label-block{
-            width: 100%;
-            margin-bottom: 5px;
-        }
+  &__label {
+    @include text($color_third, 1rem, 700, 20px, left);
+  }
 
-        &__label {
-            @include text ($color_third, 1rem, 700, 20px, left);
-        }
+  &__button {
+    @include blockContent(100%, auto, 20px 0 0 0, flex, center, center);
+  }
 
-        &__button{
-            @include blockContent(100%, auto, 20px 0 0 0, flex, center, center);
-        }
+  &__formats {
+    @include blockContent(100%, auto, 20px 0 0 0, flex, center, space-around);
+    position: relative;
+  }
 
-        &__formats{
-            @include blockContent(100%, auto, 20px 0 0 0, flex, center, space-around);
-            position: relative;
-        }
+  &__label-checkbox {
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #9b9b9e;
+    text-transform: uppercase;
+  }
+}
 
-        &__label-checkbox{
-            margin-left: 10px;
-            font-size: 0.9em;
-            color: #9b9b9e;
-            text-transform: uppercase;
-        }
+.form-message {
+  @include blockContent(100%, 150px, auto, flex, center, space-around);
+  flex-direction: column;
+
+  &__button {
+    @include blockContent(auto, auto, auto, flex, center, center);
+  }
 }

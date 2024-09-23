@@ -5,32 +5,27 @@
      
 
     &::placeholder{
-        font-size: 0.9em;
-        color: #9b9b9e;
+        @include text(#9b9b9e, 0.9em, 700, 12px, left);
         text-transform: uppercase;
     }
 
     &::-webkit-input-placeholder {
-        font-size: 0.9em;
-        color: #9b9b9e;
+        @include text(#9b9b9e, 0.9em, 700, 12px, left);
         text-transform: uppercase;
     }
 
     &::-moz-placeholder {
-        font-size: 0.9em;
-        color: #9b9b9e;
+        @include text(#9b9b9e, 0.9em, 700, 12px, left);
         text-transform: uppercase;
     }/* Firefox 19+ */
     
     &:-moz-placeholder {
-        font-size: 0.9em;
-        color: #9b9b9e;
+        @include text(#9b9b9e, 0.9em, 700, 12px, left);
         text-transform: uppercase;
     }/* Firefox 18- */
 
     &:-ms-input-placeholder {
-        font-size: 0.9em;
-        color: #9b9b9e;
+        @include text(#9b9b9e, 0.9em, 700, 12px, left);
         text-transform: uppercase;
     }
 
