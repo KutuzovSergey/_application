@@ -16,7 +16,8 @@ export const useDocument = (
   defaultValues: TableCellType | null,
   active: boolean
 ): UseDocumentType => {
-  const userName: string = useSelector(
+  
+  const userName: string | null = useSelector(
     (state: StateUserType) => state.userData.userData.username
   );
   const userToken: string = useSelector(
@@ -59,7 +60,7 @@ export const useDocument = (
     sig: false,
   });
 
-  const prepareShipment = (username: string): TableCellType => {
+  const prepareShipment = (username: string | null): TableCellType => {
     const newNewDocument: TableCellType = { ...newDocument };
 
     if (defaultValues === null) {
@@ -89,13 +90,15 @@ export const useDocument = (
       }
 
       newNewDocument.companySigDate = todaysDate;
-      newNewDocument.employeeSignatureName = username;
+      if (username !== null) {
+        newNewDocument.employeeSignatureName = username;
+      }
 
-      return newNewDocument;
+      return newNewDocument
     } else {
-      return newNewDocument;
+      return newNewDocument
     }
-  };
+  }
 
   const chengePost = (e: ChangeEvent<HTMLInputElement>): void => {
     const newNewDocument: TableCellType = { ...newDocument };
@@ -124,9 +127,9 @@ export const useDocument = (
 
     setCheckboxFormat(newCheckboxFormat);
     setNewDocument(newNewDocument);
-  };
+  }
 
-  const validation = (e: FormEvent<HTMLInputElement>): boolean => {
+  const validation = (e: FormEvent<HTMLFormElement>): boolean => {
     const form = e.target as HTMLFormElement;
     const newErrorText: ErrorTextPostType = { ...errorText };
     const newErrorStatus: ErrorStatusPostType = { ...errorStatusDoc };
@@ -192,11 +195,11 @@ export const useDocument = (
     setErrorStatusDoc(newErrorStatus);
 
     if (result !== 0) {
-      return false;
+      return false
     } else {
-      return true;
+      return true
     }
-  };
+  }
 
   const clearForm = () => {
     setNewDocument({
@@ -222,9 +225,9 @@ export const useDocument = (
       errorStatus: "",
       errorFormat: "",
     });
-  };
+  }
 
-  const addPost = (url: string) => {
+  const addPost = (url: string): void => {
     let idUrl: string = "";
 
     if (defaultValues !== null) {
@@ -242,9 +245,15 @@ export const useDocument = (
         }
       })
       .catch(function (error) {
-        console.log(error);
+        if (error) {
+          setErrorMessage(error.message);
+        } else { 
+          setErrorMessage('Что-то пошло не так');
+          console.log(error);
+        }
+        setErrorMessageStatus(true);
       });
-  };
+  }
 
   useEffect(() => {
     if (defaultValues !== null) {
@@ -263,5 +272,5 @@ export const useDocument = (
     chengePost,
     clearForm,
     addPost,
-  ];
-};
+  ]
+}

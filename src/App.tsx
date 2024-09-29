@@ -24,7 +24,7 @@ function App() {
         localStorage.getItem("userName") !== ""
       ) {
         const userData: UserDataType = {
-          username: localStorage.getItem("userName"),
+          username: localStorage.getItem("userName") as string,
           password: ""
         }
         dispatch(addUserData(userData));
@@ -34,21 +34,17 @@ function App() {
         dispatch(changeIsAuth(false));
       }
     }
-  };
-  console.log(localStorage);
-  // localStorage.removeItem('userToken');
-  // localStorage.removeItem('userName');
+  }
+  
   useEffect(() => {
     setUserStatus();
   }, []);
 
   return (
-    <div className="isAuth">
       <BrowserRouter>
         <AppRouter />
       </BrowserRouter>
-    </div>
-  );
+  )
 }
 
 export default App;

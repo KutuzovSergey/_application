@@ -13,10 +13,10 @@ import { changeData } from "../AP/allRequests.ts";
 import "../styles/componentStyles/TableCell.scss";
 
 type Props = {
-  cell: TableCellType;
+  cell: TableCellType,
 };
 
-const TableCell: FC = (props: Props) => {
+const TableCell: FC<Props> = (props: Props) => {
   const [errorText, errorStatus, deleteCell] = useDeleteCell(props.cell.id);
   const [modalInfo, setModalInfo] = useState<boolean>(false);
   const [modalInfoText, setModalInfoText] = useState<string>("");
@@ -25,11 +25,11 @@ const TableCell: FC = (props: Props) => {
   const openModalInfo = () => {
     setModalInfo(true);
     setModalInfoText("Эта функция пока не доступна");
-  };
+  }
 
   const openModalChange = () => {
     setModalChange(true);
-  };
+  }
 
   useEffect(() => {
     if (errorStatus) {
@@ -54,7 +54,7 @@ const TableCell: FC = (props: Props) => {
 
   const selectFormat = (e: string): void => {
     console.log(e);
-  };
+  }
 
   return (
     <div className="table-cell" id={props.cell.id}>
@@ -69,7 +69,7 @@ const TableCell: FC = (props: Props) => {
         </div>
         <div className="table-cell__wrapper">
           <div className="table-cell__document-type table-cell__block">
-            <span>{props.cell.documentType}</span>
+            <span>{props.cell.documentName}</span>
           </div>
           <div className="table-cell__number table-cell__block">
             <span>Номер документа: {props.cell.employeeNumber}</span>
@@ -91,7 +91,7 @@ const TableCell: FC = (props: Props) => {
             <IconButton
               aria-label="fingerprint"
               color="secondary"
-              onClick={() => deleteCell(props.cell.id)}
+              onClick={() => deleteCell()}
             >
               <ClearIcon />
             </IconButton>
@@ -120,7 +120,7 @@ const TableCell: FC = (props: Props) => {
         />
       </MyModal>
     </div>
-  );
-};
+  )
+}
 
 export default TableCell;

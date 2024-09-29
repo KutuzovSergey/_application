@@ -16,18 +16,18 @@ export const userDataReducer = (
 ) => {
   switch (action.type) {
     case userConst.CHANGE_IS_AUTH:
-      return { ...state, isAuth: action.userData };
+      return { ...state, isAuth: action.userData }
     case userConst.ADD_USER_DATA:
       return {
         ...state,
         userData: action.userData,
-      };
+      }
     case userConst.ADD_USER_TOKEN: {
-      return { ...state, token: action.userData };
+      return { ...state, token: action.userData }
     }
     case userConst.INSTALL_USER:
-      return { ...action.userData };
+      return { ...action.userData }
     default:
-      return state;
+      return state
   }
-};
+}

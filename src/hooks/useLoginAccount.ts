@@ -41,16 +41,16 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
     }
 
     setUserData(newUserData);
-  };
+  }
 
-  const validation = (e: FormEvent<HTMLInputElement>): boolean => {
+  const validation = (e: FormEvent<HTMLFormElement>): boolean => {
     const form = e.target as HTMLFormElement;
     const newErrorText: ErrorTextType = { ...errorText };
     const newErrorStatus: ErrorStatusType = { ...errorStatus };
     let result = 0;
 
     for (let i = 0; i < form.length; i++) {
-      const element = form[i] as HTMLInputElement;
+      const element = form[i] as HTMLFormElement;
       const elementValue: string = element.value.trim();
 
       switch (element.name) {
@@ -104,16 +104,16 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
     setErrorStatus(newErrorStatus);
 
     if (result !== 0) {
-      return false;
+      return false
     } else {
-      return true;
+      return true
     }
-  };
+  }
 
   const returnFormState = (): void => {
     setErrorConnection(false);
     setErrorConnectionText("");
-  };
+  }
 
   const clearForm = () => {
     setUserData({
@@ -128,7 +128,7 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
       errorName: "",
       errorPassword: "",
     });
-  };
+  }
 
   const showPasswordError = () => {
       const newErrorText = { ...errorText };
@@ -141,7 +141,7 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
 
       setErrorText(newErrorText);
       setErrorStatus(newErrorStatus);
-  };
+  }
 
   useEffect(() => {
     if (!activeForm) {
@@ -166,5 +166,5 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
     setErrorConnection,
     setErrorConnectionText,
     showPasswordError,
-  ];
-};
+  ]
+}

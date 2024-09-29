@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { useLoginAccount } from "../hooks/useLoginAccount.ts";
 import { dataPreparation } from "../utils/createUserNumber.ts";
@@ -16,7 +16,7 @@ type Props = {
   setActive: (active: boolean) => void;
 };
 
-const LoginForm: FC = (props: Props) => {
+const LoginForm: FC<Props> = (props: Props) => {
   const [userToken, setUserToken] = useState<string>("");
   const [
     userData,
@@ -40,7 +40,7 @@ const LoginForm: FC = (props: Props) => {
     clearForm,
   );
 
-  const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
+  const submittingForm = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (validation(e)) {
       const user: string = dataPreparation(userData, 13);
@@ -62,7 +62,7 @@ const LoginForm: FC = (props: Props) => {
           }
         });
     }
-  };
+  }
 
   useEffect(() => {
     userLegalization();
@@ -83,7 +83,7 @@ const LoginForm: FC = (props: Props) => {
       <div className="form__block">
         <span className="form__title">Войти</span>
       </div>
-      <form className="form__wtapper" onSubmit={submittingForm}>
+      <form className="form__wtapper" onSubmit={(e) => submittingForm(e)}>
         <div className="form__block">
           <div className="form__label-block">
             <label htmlFor="UserName" className="form__label">
@@ -127,7 +127,7 @@ const LoginForm: FC = (props: Props) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 export default LoginForm;

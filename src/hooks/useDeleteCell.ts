@@ -12,20 +12,23 @@ export const useDeleteCell = (id: string): UseDeleteCellType => {
   const dispatch = useDispatch();
 
   const deleteCell = () => {
-    const userToken: string = localStorage.getItem('userToken');
+    const userToken: string | null = localStorage.getItem('userToken');
     const newDocument: DocumentsReducerType = [...documents];
 
     deleteCellData(userToken, deleteData, id).then(function (respons) {
       if (respons.data.error_code === 0) {
-        console.log(respons.data);
-        console.log(newDocument.filter(doc => doc.id !== id));
         dispatch(deleteDocument(newDocument.filter(doc => doc.id !== id)));
       } else {
-        console.log(respons.data);
         setErrorText(respons.data.error_text);
-        setErrorStatus(true)
+        setErrorStatus(true);
       }
     }).catch(function (error) {
+      if (error) {
+        setErrorText(error.message);
+      } else {
+        setErrorText('Что-то пошло не так');
+      }
+      setErrorStatus(true);
       console.log(error);
     });
   }

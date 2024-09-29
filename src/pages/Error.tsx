@@ -1,13 +1,9 @@
-import { FC } from 'react';
+import React, { FC } from "react";
 
-import '../styles/Error.scss';
+import "../styles/Error.scss";
 
 const Error: FC = () => {
-
-    return (
-        <div className="error">
-        </div>
-    )
+  return <div className="error"></div>
 }
 
 export default Error;

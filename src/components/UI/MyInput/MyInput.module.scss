@@ -1,35 +1,38 @@
-@import '../../../styles/Main.scss';
+@import "../../../styles/Main.scss";
 
-.myInput{
-     @include data_entry_form(100%, 40px, $color, 0.9em, 5px 15px, $background_color, 3px);
-     
+.myInput {
+  @include data_entry_form(
+    100%,
+    40px,
+    $color,
+    0.9em,
+    5px 15px,
+    $background_color,
+    3px
+  );
 
-    &::placeholder{
-        @include text(#9b9b9e, 0.9em, 700, 12px, left);
-        text-transform: uppercase;
-    }
+  &::placeholder {
+    @include text(#9b9b9e, 0.9em, 700, 12px, left);
+    text-transform: uppercase;
+  }
 
-    &::-webkit-input-placeholder {
-        @include text(#9b9b9e, 0.9em, 700, 12px, left);
-        text-transform: uppercase;
-    }
+  &::-webkit-input-placeholder {
+    @include text(#9b9b9e, 0.9em, 700, 12px, left);
+    text-transform: uppercase;
+  }
 
-    &::-moz-placeholder {
-        @include text(#9b9b9e, 0.9em, 700, 12px, left);
-        text-transform: uppercase;
-    }/* Firefox 19+ */
-    
-    &:-moz-placeholder {
-        @include text(#9b9b9e, 0.9em, 700, 12px, left);
-        text-transform: uppercase;
-    }/* Firefox 18- */
+  &::-moz-placeholder {
+    @include text(#9b9b9e, 0.9em, 700, 12px, left);
+    text-transform: uppercase;
+  } /* Firefox 19+ */
 
-    &:-ms-input-placeholder {
-        @include text(#9b9b9e, 0.9em, 700, 12px, left);
-        text-transform: uppercase;
-    }
+  &:-moz-placeholder {
+    @include text(#9b9b9e, 0.9em, 700, 12px, left);
+    text-transform: uppercase;
+  } /* Firefox 18- */
 
+  &:-ms-input-placeholder {
+    @include text(#9b9b9e, 0.9em, 700, 12px, left);
+    text-transform: uppercase;
+  }
 }
-
-
-

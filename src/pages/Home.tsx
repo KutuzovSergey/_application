@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { installUser, setListDocument } from "../action/actionCreators.ts";
@@ -20,9 +20,8 @@ const Home: FC = () => {
   const tableCells: TableCellsType = useSelector(
     (state: StateUserType) => state.documents
   );
-  console.log(tableCells);
 
-  const userToken: string = localStorage.getItem("userToken");
+  const userToken: string | null = localStorage.getItem("userToken");
   
   const [modalInfoHomeText, setModalInfoHomeText] = useState<string>('');
   const [modalHomeInfo, setModalHomeInfo] = useState<boolean>(false);
@@ -43,11 +42,11 @@ const Home: FC = () => {
       })
     );
     localStorage.userToken = "";
-  };
+  }
 
   const openWindow = (): void => {
     setModalAddPost(true);
-  };
+  }
 
   useEffect(() => {
     if (userToken !== "") {
@@ -57,7 +56,14 @@ const Home: FC = () => {
           setLoader(false);
         })
         .catch(function (error) {
+          if (error) {
+            setModalInfoHomeText(error.message);
+          } else {
+            setModalInfoHomeText('Что-то пошло не так');
+          }
+          setModalHomeInfo(true);
           console.log(error);
+          setLoader(false);
         });
     } else {
       setLoader(true);
@@ -85,8 +91,8 @@ const Home: FC = () => {
             <span>{userName}</span>
           </div>
           <div className="entry-form__data">
-            {tableCells.map((cell) => (
-              <TableCell cell={cell} key={cell.id} />
+              {tableCells.map((cell) => (
+                <TableCell cell={cell} key={cell.id} />
             ))}
           </div>
         </div>
@@ -111,6 +117,6 @@ const Home: FC = () => {
       </MyModal>
     </div>
   );
-};
+}
 
 export default Home;

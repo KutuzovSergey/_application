@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect } from "react";
+import React, { FC, FormEvent, useEffect } from "react";
 import MyInput from "./UI/MyInput/MyInput.tsx";
 import ErrorForm from "./UI/ErrorForm/ErrorForm.tsx";
 import MyButton from "./UI/MyButton/MyButton.tsx";
@@ -18,10 +18,10 @@ type Props = {
   setModalInfoHomeText: (text: string) => void;
 };
 
-const PostForm: FC = (props: Props) => {
+const PostForm: FC<Props> = (props: Props) => {
   const [
     newDocument,
-    errorStatus,
+    errorStatusDoc,
     errorText,
     checkboxFormat,
     errorMessage,
@@ -32,7 +32,7 @@ const PostForm: FC = (props: Props) => {
     addPost,
   ] = useDocument(props.defaultValues, props.active);
 
-  const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
+  const submittingForm = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (validation(e)) {
@@ -74,7 +74,7 @@ const PostForm: FC = (props: Props) => {
             placeholder="например: Трудовой договор"
             onChange={chengePost}
           />
-          <ErrorForm bottom="-20px" left="0px" active={!errorStatus.errorName}>
+          <ErrorForm bottom="-20px" left="0px" active={!errorStatusDoc.errorName}>
             {errorText.errorName}
           </ErrorForm>
         </div>
@@ -95,7 +95,7 @@ const PostForm: FC = (props: Props) => {
           <ErrorForm
             bottom="-20px"
             left="0px"
-            active={!errorStatus.errorNumber}
+            active={!errorStatusDoc.errorNumber}
           >
             {errorText.errorNumber}
           </ErrorForm>
@@ -117,7 +117,7 @@ const PostForm: FC = (props: Props) => {
           <ErrorForm
             bottom="-20px"
             left="0px"
-            active={!errorStatus.errorStatus}
+            active={!errorStatusDoc.errorStatus}
           >
             {errorText.errorStatus}
           </ErrorForm>
@@ -161,7 +161,7 @@ const PostForm: FC = (props: Props) => {
             <ErrorForm
               bottom="-20px"
               left="15%"
-              active={!errorStatus.errorFormat}
+              active={!errorStatusDoc.errorFormat}
             >
               {errorText.errorFormat}
             </ErrorForm>

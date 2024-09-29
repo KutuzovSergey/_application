@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { useRegistrAccount } from "../hooks/useRegistrAccount.ts";
 import { authorizationsUser } from "../AP/allRequests.ts";
@@ -16,7 +16,7 @@ type Props = {
   setActive: (active: boolean) => void;
 };
 
-const RegistrForm: FC = (props: Props) => {
+const RegistrForm: FC<Props> = (props: Props) => {
   const [userToken, setUserToken] = useState<string>("");
   const [
     userData,
@@ -40,7 +40,7 @@ const RegistrForm: FC = (props: Props) => {
     clearForm
   );
 
-  const submittingForm = (e: FormEvent<HTMLInputElement>): void => {
+  const submittingForm = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (validation(e)) {
@@ -94,7 +94,7 @@ const RegistrForm: FC = (props: Props) => {
           <MyInput
             type="text"
             name="UserName"
-            value={userData.userName}
+            value={userData.username}
             placeholder="Ваше имя"
             onChange={changeInput}
           />
@@ -111,7 +111,7 @@ const RegistrForm: FC = (props: Props) => {
           <MyInput
             type="password"
             name="UserPassword"
-            value={userData.userPassword}
+              value={userData.password}
             placeholder="Пароль"
             onChange={changeInput}
           />
@@ -149,7 +149,7 @@ const RegistrForm: FC = (props: Props) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 export default RegistrForm;

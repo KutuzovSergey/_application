@@ -18,9 +18,8 @@ export const useLegalization = (
       clearForm();
       localStorage.userToken = userToken;
       localStorage.userName = userData.username;
-      console.log(localStorage);
     }
   };
 
-  return [userLegalization];
+  return [userLegalization]
 };

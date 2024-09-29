@@ -49,9 +49,9 @@ export const useRegistrAccount = (
     }
 
     setUserData(newUserData);
-  };
+  }
 
-  const validation = (e: FormEvent<HTMLInputElement>): boolean => {
+  const validation = (e: FormEvent<HTMLFormElement>): boolean => {
     const form = e.target as HTMLFormElement;
     const newErrorText: ErrorTextRegistrType = { ...errorText };
     const newErrorStatus: ErrorStatusRegistrType = { ...errorStatus };
@@ -148,16 +148,16 @@ export const useRegistrAccount = (
     setErrorStatus(newErrorStatus);
 
     if (result !== 0) {
-      return false;
+      return false
     } else {
-      return true;
+      return true
     }
-  };
+  }
 
   const returnFormState = (): void => {
     setErrorConnection(false);
     setErrorConnectionText("");
-  };
+  }
 
   const clearForm = () => {
     setUserData({
@@ -175,7 +175,7 @@ export const useRegistrAccount = (
       errorPassword: "",
       errorRepeatPassword: "",
     });
-  };
+  }
 
     const showPasswordError = () => {
       const newErrorText = { ...errorText };
@@ -190,7 +190,7 @@ export const useRegistrAccount = (
 
       setErrorText(newErrorText);
       setErrorStatus(newErrorStatus);
-  };
+  }
 
   useEffect(() => {
     if (!activeForm) {
@@ -215,5 +215,5 @@ export const useRegistrAccount = (
     setErrorConnection,
     setErrorConnectionText,
     showPasswordError,
-  ];
-};
+  ]
+}

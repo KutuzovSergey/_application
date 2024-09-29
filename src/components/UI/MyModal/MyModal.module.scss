@@ -1,92 +1,87 @@
-@import '../../../styles/Main.scss';
+@import "../../../styles/Main.scss";
 
-.myModal{
-    @include modalFon();
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.myModal {
+  @include modalFon();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $background_color;
+  opacity: 0;
+  z-index: 99999999;
+  pointer-events: none;
+  transition: 0.9s;
+
+  &__disable {
+    display: none;
+  }
+
+  &__disable_active {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    width: 100%;
+    height: 120%;
     background-color: $background_color;
-    opacity: 0;
-    z-index: 99999999;
-    pointer-events: none;
-    transition: 0.9s;
+  }
 
-    &__disable{
-        display: none;
-    }
-    
-    &__disable_active{
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 9;
-        width: 100%;
-        height: 120%;
-        background-color: $background_color;
-    }
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
 
-    &.active{
-        opacity: 1;
-        pointer-events: all;
-    }
+  &__block {
+    padding: 30px;
+    border-radius: 12px;
+    background-color: $background_color_fourth;
+    width: auto;
+    max-height: 500px;
+    transform: scale(0);
+    transition: 0.8s all;
+  }
 
-    &__block{
-        padding: 30px;
-        border-radius: 12px;
-        background-color: $background_color_fourth;
-        width: auto;
-        max-height: 500px;
-        transform: scale(0);
-        transition: 0.8s all;
-        // box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1);
-    }
+  &__block_scroll {
+    overflow: scroll;
+    overflow-x: hidden;
+  }
 
-    &__block_scroll{
-        overflow: scroll;
-        overflow-x: hidden;
-    }
+  &__block_scroll_none {
+    overflow: hidden;
+  }
 
-    &__block_scroll_none{
-        overflow: hidden;
-    }
+  &__block::-webkit-scrollbar {
+    width: 8px;
+  }
 
-    &__block::-webkit-scrollbar{
-        width: 8px;
-    }
-    
-    &__block::-webkit-scrollbar-track{
-        background: $background;
-        border-radius: 0 12px 12px 0;
-    }
+  &__block::-webkit-scrollbar-track {
+    background: $background;
+    border-radius: 0 12px 12px 0;
+  }
 
-    &__block::-webkit-scrollbar-thumb{
-        background-color: $background_color;
-        border-radius: 12px;
-        border: $background_color;
-    }
+  &__block::-webkit-scrollbar-thumb {
+    background-color: $background_color;
+    border-radius: 12px;
+    border: $background_color;
+  }
 
-    &__block.active{
-        transform: scale(1);
-    }
+  &__block.active {
+    transform: scale(1);
+  }
 
-    &__close{
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        right: 30px;
-        top: 20px;
-    }
+  &__close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+  }
 }
-
 
 @media (max-width: 500px) {
-    .myModal{
-
-        &__close{
-            right: 10px;
-            top: 10px;
-        }
+  .myModal {
+    &__close {
+      right: 10px;
+      top: 10px;
     }
+  }
 }
-
-// 100vh?

@@ -1,103 +1,86 @@
-@import './../Main.scss';
+@import "./../Main.scss";
 
 .table-cell {
-        @include blockContent(100%, auto, 0px, flex, center, space-around);
-        width: 100%;
-        height: auto;
-        position: relative;
-        margin-top: 30px;
-        background-color: $color_second;
-        border-radius: 3px;
-        border-top: 2px solid $background;
-        border-bottom: 2px solid $background;
-        border-right: 1px solid $background;
-        @media (max-width: 900px) {
-                flex-direction: column;
-        }
+  @include blockContent(100%, auto, 0px, flex, center, space-around);
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-top: 30px;
+  background-color: $color_second;
+  border-radius: 3px;
+  border-top: 2px solid $background;
+  border-bottom: 2px solid $background;
+  border-right: 1px solid $background;
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 
-        &__info{
-                @include blockContent(60%, 100%, auto, flex, center, space-around);
-                flex-direction: column;
-                @media (max-width: 1200px) {
-                        width: 50%;
-                }
-                @media (max-width: 900px) {
-                        width: 100%;
-                }
-        }
+  &__info {
+    @include blockContent(60%, 100%, auto, flex, center, space-around);
+    flex-direction: column;
+    @media (max-width: 1200px) {
+      width: 50%;
+    }
+    @media (max-width: 900px) {
+      width: 100%;
+    }
+  }
 
-        &__wrapper{
-                @include blockContent(100%, 100%, auto, flex, center, center);
-                @media (max-width: 1200px) {
-                        flex-direction: column;
-                }
-        }
+  &__wrapper {
+    @include blockContent(100%, 100%, auto, flex, center, center);
+    @media (max-width: 1200px) {
+      flex-direction: column;
+    }
+  }
 
-        &__tools{
-                @include blockContent(40%, 100%, auto, flex, center, space-around);
-                @media (max-width: 1200px) {
-                        width: 50%;
-                }
-                @media (max-width: 900px) {
-                        width: 100%;
-                        border-left: 1px solid $background;
-                        border-right: 1px solid $background;
-                        justify-content: left;
-                        padding-left: 10px;
-                        padding-bottom: 10px;
-                        padding-top: 10px;
-                }
+  &__tools {
+    @include blockContent(40%, 100%, auto, flex, center, space-around);
+    @media (max-width: 1200px) {
+      width: 50%;
+    }
+    @media (max-width: 900px) {
+      width: 100%;
+      border-left: 1px solid $background;
+      border-right: 1px solid $background;
+      justify-content: left;
+      padding-left: 10px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+  }
 
-        }
+  &__block {
+    @include blockContent(50%, 100%, auto, flex, center, left);
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border-left: 1px solid $background;
+    border-right: 1px solid $background;
+    @media (max-width: 1200px) {
+      width: 100%;
+    }
+  }
 
-        &__block{
-                @include blockContent(50%, 100%, auto, flex, center, left);
-                padding-left: 5px;
-                padding-right: 5px;
-                padding-left: 10px;
-                padding-top: 10px;
-                border-left: 1px solid $background;
-                border-right: 1px solid $background;
-                @media (max-width: 1200px) {
-                        width: 100%;
-                }
-        }
+  &__block > span {
+    @include text($color, 1rem, 700, 20px, left);
+  }
 
-        &__block>span{
-                @include text($color, 1rem, 700, 20px, left);
-        }
+  &__formats {
+    width: 240px;
+  }
 
-        &__data {
-        }
+  &__button {
+    @include blockContent(auto, auto, 0px, flex, center, center);
+    flex-direction: column;
+    @media (max-width: 900px) {
+      right: 0;
+      top: 0;
+      position: absolute;
+    }
+  }
 
-        &__status {
-        }
-
-        &__document-type {
-        }
-
-        &__number {
-                
-        }
-
-        &__formats {
-                width: 240px;
-        }
-
-        &__download {
-        }
-
-        &__button{
-                @include blockContent(auto, auto, 0px, flex, center, center);
-                flex-direction: column;
-                @media (max-width: 900px) {
-                        right: 0;
-                        top: 0;
-                        position: absolute;
-                }
-        }
-
-        &__delete {
-                @include blockContent(100%, 100%, auto, flex, center, center);
-        }
+  &__delete {
+    @include blockContent(100%, 100%, auto, flex, center, center);
+  }
 }

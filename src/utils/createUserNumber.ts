@@ -1,12 +1,15 @@
-import { UserDataType } from "../type/typesHooks"
+import { UserDataType } from "../type/typesHooks";
 
-export const dataPreparation = (data: UserDataType, numberUser: number): string => {
-    const nawData: any = { ...data };
-    nawData.username = `${data.username}${numberUser}`;
+export const dataPreparation = (
+  data: UserDataType,
+  numberUser: number
+): string => {
+  const nawData: any = { ...data };
+  nawData.username = `${data.username}${numberUser}`;
 
-    if ('repeatPassword' in nawData) {
-        delete nawData.repeatPassword;
-    }
+  if ("repeatPassword" in nawData) {
+    delete nawData.repeatPassword;
+  }
 
-    return JSON.stringify(nawData)
-} 
+  return JSON.stringify(nawData)
+}

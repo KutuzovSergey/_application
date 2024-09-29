@@ -2,21 +2,17 @@ import { FormEvent, ChangeEvent } from "react";
 import { TableCellType } from "./typesMain";
 
 // Вход на сайт
-export type UserDataType = {
-  username: string;
-  password: string;
-  repeatPassword?: string;
-};
+export type UserDataType = {[key:string]: string}
 
 export type ErrorStatusType = {
-  errorName: boolean;
-  errorPassword: boolean;
-};
+  errorName: boolean,
+  errorPassword: boolean,
+}
 
 export type ErrorTextType = {
-  errorName: string;
-  errorPassword: string;
-};
+  errorName: string,
+  errorPassword: string,
+}
 
 export type UseLoginAccountType = [
   userData: UserDataType,
@@ -25,27 +21,27 @@ export type UseLoginAccountType = [
   errorConnection: boolean,
   errorConnectionText: string,
   changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
-  validation: (e: FormEvent<HTMLInputElement>) => boolean,
+  validation: (e: FormEvent<HTMLFormElement>) => boolean,
   clearForm: () => void,
   returnFormState: () => void,
   setErrorConnection: (error: boolean) => void,
   setErrorConnectionText: (error: string) => void,
   showPasswordError: () => void
-];
+]
 
 // Регистрация
 
 export type ErrorStatusRegistrType = {
-  errorName: boolean;
-  errorPassword: boolean;
-  errorRepeatPassword: boolean;
-};
+  errorName: boolean,
+  errorPassword: boolean,
+  errorRepeatPassword: boolean
+}
 
 export type ErrorTextRegistrType = {
-  errorName: string;
-  errorPassword: string;
-  errorRepeatPassword: string;
-};
+  errorName: string,
+  errorPassword: string,
+  errorRepeatPassword: string
+}
 
 export type UseRegistrAccountType = [
   userData: UserDataType,
@@ -54,61 +50,54 @@ export type UseRegistrAccountType = [
   errorConnection: boolean,
   errorConnectionText: string,
   changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
-  validation: (e: FormEvent<HTMLInputElement>) => boolean,
-   clearForm: () => void,
+  validation: (e: FormEvent<HTMLFormElement>) => boolean,
+  clearForm: () => void,
   returnFormState: () => void,
   setErrorConnection: (error: boolean) => void,
   setErrorConnectionText: (error: string) => void,
   showPasswordError: () => void
-];
+]
 
 // добавление новой записи
 
 export type ErrorStatusPostType = {
-  errorName: boolean;
-  errorNumber: boolean;
-  errorStatus: boolean;
-  errorFormat: boolean;
-};
+  errorName: boolean,
+  errorNumber: boolean,
+  errorStatus: boolean,
+  errorFormat: boolean
+}
 
 export type ErrorTextPostType = {
-  errorName: string;
-  errorNumber: string;
-  errorStatus: string;
-  errorFormat: string;
-};
+  errorName: string,
+  errorNumber: string,
+  errorStatus: string,
+  errorFormat: string
+}
 
 export type CheckboxFormatType = {
-  pdf: boolean;
-  sig: boolean;
-};
+  pdf: boolean,
+  sig: boolean
+}
 
 export type UseDocumentType = [
   newDocument: TableCellType,
-  errorStatus: ErrorStatusPostType,
+  errorStatusDoc: ErrorStatusPostType,
   errorText: ErrorTextPostType,
   checkboxFormat: CheckboxFormatType,
   errorMessage: string,
   errorMessageStatus: boolean,
-  changeInput: (e: ChangeEvent<HTMLInputElement>) => void,
-  validation: (e: FormEvent<HTMLInputElement>) => boolean,
+  validation: (e: FormEvent<HTMLFormElement>) => boolean,
   chengePost: (e: ChangeEvent<HTMLInputElement>) => void,
   clearForm: () => void,
-  addPost: () => void,
-  selectFormat: (e: ChangeEvent<HTMLInputElement>) => void
-];
+  addPost: (url: string) => void,
+]
 
 export type UseLegalizationType = [
-  userLegalization: (
-    userToken: string,
-    userData: UserDataType,
-    setActive: (bool: boolean) => void,
-    clearForm: () => void
-  ) => void
-];
+  userLegalization: () => void
+]
 
 export type UseDeleteCellType = [
   errorText: string,
   errorStatus: boolean,
   deleteCell: () => void
-];
+]
