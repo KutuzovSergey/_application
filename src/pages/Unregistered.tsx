@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import MyModal from "../components/UI/MyModal/MyModal.tsx";
 import LoginForm from "../components/LoginForm.tsx";
 import RegistrForm from "../components/RegistrForm.tsx";
+import MyTitle from "../components/UI/MyTitle/MyTitle.tsx";
 
 import "../styles/Unregistered.scss";
 
@@ -20,6 +21,9 @@ const Unregistered: FC = () => {
 
   return (
     <div className="unregistered">
+      <div className="unregistered__title">
+        <MyTitle>Для продолжения работы с приложением выполните вход или регистрацию</MyTitle>
+      </div>
       <div className="unregistered__wrapper">
         <div className="unregistered__entry">
           <Button variant="contained" size="large" onClick={makeEntrance}>

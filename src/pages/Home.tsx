@@ -47,7 +47,7 @@ const Home: FC = () => {
   const openWindow = (): void => {
     setModalAddPost(true);
   }
-
+  
   useEffect(() => {
     if (userToken !== "") {
       getTableData(userToken)
@@ -66,7 +66,7 @@ const Home: FC = () => {
           setLoader(false);
         });
     } else {
-      setLoader(true);
+      exitApp();
     }
   }, [userToken]);
 

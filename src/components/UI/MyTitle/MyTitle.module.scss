@@ -1,0 +1,11 @@
+@import "../../../styles/Main.scss";
+
+.title {
+  @include blockContent( 100%, auto, 0px, flex, center, center );
+
+  &__text {
+    @include text(#9b9b9e, 1.2rem, 900, 28px, left);
+    text-transform: uppercase;
+    text-align: center;
+  }
+}

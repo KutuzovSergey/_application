@@ -61,9 +61,9 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
             if (newErrorStatus.errorName) {
               newErrorStatus.errorName = false;
             }
-          } else if (elementValue.length < 6) {
+          } else if (elementValue.length < 3) {
             newErrorText.errorName =
-              "Логин не может содержать меньше пяти символов";
+              "Логин не может содержать меньше двух символов";
             result = ++result;
             if (newErrorStatus.errorName) {
               newErrorStatus.errorName = false;
@@ -82,9 +82,9 @@ export const useLoginAccount = (activeForm: boolean): UseLoginAccountType => {
             if (newErrorStatus.errorPassword) {
               newErrorStatus.errorPassword = false;
             }
-          } else if (elementValue.length < 3) {
+          } else if (elementValue.length < 6) {
             newErrorText.errorPassword =
-              "Пароль не может содержать меньше двух символов";
+              "Пароль не может содержать меньше пяти символов";
             result = ++result;
             if (newErrorStatus.errorPassword) {
               newErrorStatus.errorPassword = false;

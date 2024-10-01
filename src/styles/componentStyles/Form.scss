@@ -8,17 +8,25 @@
   display: flex;
   padding: 16px;
   border-radius: 10px;
+  @media (max-width: 600px) {
+      padding: 6px;
+  }
 
   &__wtapper {
     @include blockContent(500px, auto, auto, flex, center, space-around);
     padding: 20px 30px;
     flex-direction: column;
+    @media (max-width: 600px) {
+      width: 100%;
+      padding: 10px;
+    }
+     @media (max-width: 400px) {
+      padding: 5px;
+    }
   }
 
   &__block {
-    @include blockContent(100%, auto, auto, flex, center, left);
-    width: 100%;
-    margin-top: 20px;
+    @include blockContent(100%, auto, 20px 0 0 0, flex, center, left);
     flex-direction: column;
     position: relative;
   }
@@ -26,6 +34,9 @@
   &__title {
     @include blockContent(100%, auto, auto, flex, center, left);
     @include text($color, 2rem, 700, 20px, left);
+    @media (max-width: 600px) {
+      font-size: 1.3rem;
+    }
   }
 
   &__label-block {
