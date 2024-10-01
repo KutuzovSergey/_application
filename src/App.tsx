@@ -41,9 +41,9 @@ function App() {
   }, []);
 
   return (
-      <BrowserRouter>
+    <BrowserRouter basename="/_application">
         <AppRouter />
-      </BrowserRouter>
+    </BrowserRouter>
   )
 }
 
